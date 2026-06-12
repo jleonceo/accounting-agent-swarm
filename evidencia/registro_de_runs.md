@@ -3,7 +3,7 @@
 Cada fila es una simulación completa del enjambre sobre un banco de pruebas, puntuada por un
 corrector automático contra un golden set. Tres exámenes distintos a lo largo del camino:
 el ciclo Python de mayo (63 casos), el ciclo JS de junio (80 casos) y la Fábrica (121-128 casos).
-Las notas entre exámenes **no son comparables entre sí** — cada examen es más duro que el anterior.
+Las notas entre exámenes **no son comparables entre sí**: cada examen es más duro que el anterior.
 
 | Run | Fecha | Modelo | Nota | Qué pasó de verdad |
 |---|---|---|---|---|
@@ -30,7 +30,7 @@ Las notas entre exámenes **no son comparables entre sí** — cada examen es m�
 
 ## Cómo leer esta tabla
 
-Las caídas grandes (32,1 · 35,4 · 53,6) **no las causó el enjambre** — las causó el examen:
+Las caídas grandes (32,1 · 35,4 · 53,6) no las causó el enjambre. Las causó el examen:
 un bug del harness, un runner colapsado, un golden desincronizado. Esa es la lección
 central de todo el proyecto: cuando evalúas un sistema LLM, **el banco de pruebas falla
 más a menudo que el sistema**. Si solo miras la última nota, te cuentas una historia equivocada.
@@ -40,8 +40,8 @@ simulación**. Cuando un caso falla, lo primero es verificar contra la fuente pr
 de datos, el documento) quién tiene razón — el golden, el corrector y el harness son sospechosos
 exactamente igual que el enjambre.
 
-El cierre: **93,3/100 sobre 128 casos**. El tail restante (6 casos) son casos límite y
-variabilidad de modelo, documentados en `2026-06-12-RUN4_cambios_y_tail.md` — perseguirlos
+El cierre: **93,3/100 sobre 128 casos**. Los 6 casos que quedan abiertos son casos límite y
+variabilidad del modelo, documentados en `2026-06-12-RUN4_cambios_y_tail.md`. Perseguirlos
 uno a uno es el bucle de rendimientos decrecientes.
 
 ---

@@ -17,7 +17,7 @@ Informe del corrector: `2026-06-12-RUN4_sonnet46_fabrica_informe.md` · Salida: 
 
 ## Tail NO cerrado (6 casos) — IMPORTANTE para próximas simulaciones
 - **SIN-03** (liquidación IVA): emite líneas de más (475 como debe+haber + 572 banco). **NO se aplicó** el fix de REGLA DOBLE ASIENTO para liquidación IVA (era el F4 del primer guion, se omitió). **Es el único de arreglo limpio pendiente.**
-- **SIN-25** (opción de compra): sigue devolviendo asiento vacío `[]` pese a la plantilla E. Raíz esquiva → re-correr aislado con logging del razonamiento del generador antes de tocar nada más.
+- **SIN-25** (opción de compra): sigue devolviendo asiento vacío `[]` pese a la plantilla E. Raíz esquiva → relanzar aislado con logging del razonamiento del generador antes de tocar nada más.
 - **SIN-14** (periodificación): el validador sigue frenando un asiento válido pese al endurecimiento del CHECK 2. Variabilidad del modelo, no falta de regla.
 - **SIN-13** (apertura): exceso de celo, freno no codificado en ninguna regla.
 - **ACR-41000004 / ACR-41000006**: variabilidad del extractor (truncado / asiento vacío); el blindaje no la eliminó del todo.

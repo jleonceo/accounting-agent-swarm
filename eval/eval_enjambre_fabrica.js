@@ -10,7 +10,7 @@ export const meta = {
 }
 
 // ── VERSION PUBLICADA: rutas locales sustituidas por relativas/placeholder ──
-// Este script corre dentro del Workflow tool de Claude Code. El banco completo
+// Este script se ejecuta dentro del Workflow tool de Claude Code. El banco completo
 // (128 .txt + golden + corrector + extractos) vive en el proyecto privado;
 // en este repo hay una muestra del golden en eval/golden_muestra.json.
 // NOTA: los args del Workflow tool NO llegan a este script (bug conocido) -> mandan los defaults.
