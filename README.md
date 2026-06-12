@@ -12,13 +12,13 @@ verificador independiente.
 
 ![Curva de las 19 simulaciones](assets/curva_runs.png)
 
-Diecinueve simulaciones medidas entre mayo y junio de 2026, sobre tres exámenes cada vez más
-duros. Lo que más me ha enseñado este proyecto no son los récords — son las caídas.
+Diecinueve simulaciones medidas entre mayo y junio de 2026, sobre tres exámenes cada vez
+más duros. Lo que más me ha enseñado este proyecto no son los récords, son las caídas.
 
 Las tres peores notas de la curva (32,1 · 35,4 · 57,1) no las causó el enjambre. Las causó
 el examen: un bug del harness que no parseaba la salida del validador, un runner que colapsó
 a mitad de ejecución dejando 56 casos sin respuesta, un golden set que se había quedado
-desincronizado con la base de datos. El enjambre no empeoró 65 puntos en un día — lo que se
+desincronizado con la base de datos. El enjambre no empeoró 65 puntos en un día: lo que se
 rompió fue el instrumento de medida.
 
 Esa es la lección que me llevo: **cuando evalúas un sistema LLM, el banco de pruebas falla
@@ -33,10 +33,10 @@ documento (.pdf/.txt) → EXTRACTOR → json → GENERADOR → asiento → VALID
 extracto bancario     → PUNTEADOR → conciliación contra MySQL vivo
 ```
 
-- **extractor-contable** — lee facturas, nóminas y extractos; devuelve JSON estructurado. Si el documento es ilegible, lo dice (no inventa).
-- **generador-contable** — del JSON al asiento completo según el PGC 2007, con las cuentas reales de la empresa.
-- **validador-contable** — verifica cuadre, integridad y coherencia. Decide: contabilizar o frenar a revisión manual.
-- **punteador-contable** — concilia el extracto bancario contra el diario real en MySQL, línea a línea.
+- **extractor-contable**: lee facturas, nóminas y extractos; devuelve JSON estructurado. Si el documento es ilegible, lo dice (no inventa).
+- **generador-contable**: del JSON al asiento completo según el PGC 2007, con las cuentas reales de la empresa.
+- **validador-contable**: verifica cuadre, integridad y coherencia. Decide si se contabiliza o se frena a revisión manual.
+- **punteador-contable**: concilia el extracto bancario contra el diario real en MySQL, línea a línea.
 
 El enjambre **propone, no ejecuta**: los asientos van a una tabla de borradores y los
 inserta un humano tras revisarlos. La autonomía es proporcional al riesgo de reversibilidad.
@@ -80,16 +80,16 @@ son la misma cosa. Con el banco por fin fiable, la nota volvió a medir al enjam
 | Conciliación (casación contra MySQL vivo) | 79/79 = 100% |
 | Falsos positivos (asientos erróneos colados) | **0** |
 
-Nota global: **93,3/100**, y la decisión de cerrar ahí. El tail restante son casos límite
-(la opción de compra de un leasing, un asiento de apertura) y variabilidad de modelo —
-está documentado caso a caso en [evidencia/](evidencia/), sin maquillar. Perseguirlo uno a
-uno es el bucle de rendimientos decrecientes.
+Nota global: **93,3/100**, y la decisión de cerrar ahí. Los seis casos que quedan abiertos
+son casos límite (la opción de compra de un leasing, un asiento de apertura) y variabilidad
+del modelo; están documentados caso a caso en [evidencia/](evidencia/), sin maquillar.
+Perseguirlos uno a uno es el bucle de rendimientos decrecientes.
 
 Un detalle del cierre que resume el método: en RUN3, el validador frenó dos asientos
 alegando que sus cuentas "no existían". Un primer análisis le creyó y concluyó que faltaba
-crear 4 cuentas. Verificado contra MySQL: **las 4 existían** — el que fallaba era el
-validador, alucinando. Desde entonces tiene prohibido afirmar que una cuenta no existe
-sin ejecutar la query. No fiarse del primer agente; verificar contra la fuente.
+crear 4 cuentas. Verificado contra MySQL: las 4 existían. El que fallaba era el validador,
+que se las inventaba. Desde entonces tiene prohibido afirmar que una cuenta no existe sin
+ejecutar la consulta. No fiarse del primer agente; verificar contra la fuente.
 
 ## Qué hay en este repo
 
