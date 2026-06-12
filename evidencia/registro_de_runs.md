@@ -1,6 +1,6 @@
-# Registro histórico de corridas — la evolución real (NO es monótona)
+# Registro histórico de simulaciones — la evolución real (NO es monótona)
 
-Cada fila es una corrida completa del enjambre sobre un banco de pruebas, puntuada por un
+Cada fila es una simulación completa del enjambre sobre un banco de pruebas, puntuada por un
 corrector automático contra un golden set. Tres exámenes distintos a lo largo del camino:
 el ciclo Python de mayo (63 casos), el ciclo JS de junio (80 casos) y la Fábrica (121-128 casos).
 Las notas entre exámenes **no son comparables entre sí** — cada examen es más duro que el anterior.
@@ -22,11 +22,11 @@ Las notas entre exámenes **no son comparables entre sí** — cada examen es m�
 | R15F/R17 | 08/06 | Sonnet | 53,6 / 56,8 | Un check del corrector introduce falsos positivos |
 | R17-motivoV2 | 08/06 | Sonnet | 64,9 | Mejora del corrector, no del enjambre |
 | R18 | 08/06 | Sonnet | **69,9** | Mejor nota del ciclo JS; los falsos positivos bajan de 4 a 1 |
-| FAB | 09/06 | Sonnet | 72,4 | Primera corrida con la Fábrica de Documentos (aún con el golden viejo) |
+| FAB | 09/06 | Sonnet | 72,4 | Primera simulación con la Fábrica de Documentos (aún con el golden viejo) |
 | **RUN1** | 11/06 | Sonnet | **88,6** | Conciliación bancaria integrada (rompe el techo de 85); 2 fallos reales de 121 casos — el resto era el banco de pruebas |
 | **RUN3** | 12/06 | Sonnet | **87,1** | Primera medida real con banco limpio. 12 fallos, todos del enjambre, en operaciones poco frecuentes. Un primer análisis culpó al banco ("faltan 4 cuentas") — **falso**: verificado en MySQL, las 4 existían |
 | **RUN4** | 12/06 | Sonnet | **93,3** | Arreglos quirúrgicos en los 3 agentes con puerta de no-regresión. Frenó-bien 61→80,5%, falsos negativos 10→3, 0 falsos positivos |
-| Check SIN-03 | 13/06 | Sonnet | 4/4 exacto | Corrida acotada para verificar el último arreglo limpio (liquidación de IVA como doble asiento) |
+| Check SIN-03 | 13/06 | Sonnet | 4/4 exacto | Run acotado para verificar el último arreglo limpio (liquidación de IVA como doble asiento) |
 
 ## Cómo leer esta tabla
 

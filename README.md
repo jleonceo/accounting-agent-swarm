@@ -10,14 +10,14 @@ verificador independiente.
 
 ## La historia en una imagen
 
-![Curva de las 19 corridas](assets/curva_runs.png)
+![Curva de las 19 simulaciones](assets/curva_runs.png)
 
-Diecinueve corridas medidas entre mayo y junio de 2026, sobre tres exámenes cada vez más
+Diecinueve simulaciones medidas entre mayo y junio de 2026, sobre tres exámenes cada vez más
 duros. Lo que más me ha enseñado este proyecto no son los récords — son las caídas.
 
 Las tres peores notas de la curva (32,1 · 35,4 · 57,1) no las causó el enjambre. Las causó
 el examen: un bug del harness que no parseaba la salida del validador, un runner que colapsó
-a media corrida dejando 56 casos sin respuesta, un golden set que se había quedado
+a mitad de ejecución dejando 56 casos sin respuesta, un golden set que se había quedado
 desincronizado con la base de datos. El enjambre no empeoró 65 puntos en un día — lo que se
 rompió fue el instrumento de medida.
 
@@ -43,7 +43,7 @@ inserta un humano tras revisarlos. La autonomía es proporcional al riesgo de re
 
 ## Cómo se mide
 
-Un corrector automático en Python puntúa cada corrida contra un golden set de respuestas
+Un corrector automático en Python puntúa cada simulación contra un golden set de respuestas
 esperadas, en cinco ejes: acción correcta (¿contabilizar o frenar?), asiento exacto (cuentas
 e importes al céntimo), cuadre, calidad del freno (frenar está bien solo si el motivo es el
 correcto) y conciliación bancaria (casación contra la base de datos en vivo, no contra un fichero).
@@ -95,7 +95,7 @@ sin ejecutar la query. No fiarse del primer agente; verificar contra la fuente.
 
 ```
 evidencia/
-  registro_de_runs.md            ← las 19 corridas, una a una, con su causa real
+  registro_de_runs.md            ← las 19 simulaciones, una a una, con su causa real
   2026-06-11-RUN1_informe.md     ← informes del corrector, tal cual salieron
   2026-06-12-RUN3_analisis_fallos.md
   2026-06-12-RUN4_informe.md

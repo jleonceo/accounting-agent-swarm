@@ -14,7 +14,7 @@ export const meta = {
 // (128 .txt + golden + corrector + extractos) vive en el proyecto privado;
 // en este repo hay una muestra del golden en eval/golden_muestra.json.
 // NOTA: los args del Workflow tool NO llegan a este script (bug conocido) -> mandan los defaults.
-// Para forzar una corrida fresca, cambia el default de TS a una etiqueta nueva (sin checkpoints previos).
+// Para forzar una ejecución nueva, cambia el default de TS a una etiqueta nueva (sin checkpoints previos).
 const TS        = (args && args.timestamp) ? args.timestamp : '2026-06-12-RUN4'
 const MODEL_TAG = (args && args.model_tag) ? args.model_tag : 'sonnet46'
 const BATCH     = (args && args.batch_size) ? args.batch_size : 10   // 128 casos -> 13 lotes
