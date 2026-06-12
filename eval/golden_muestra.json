@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "nota": "MUESTRA representativa del golden set (9 de 128 casos) — el banco completo vive en el proyecto TechAcces",
+    "version_origen": "fabrica-completo-1.2",
+    "descripcion_origen": "Golden COMPLETO: día a día DERIVADO de la Fábrica (anti-deriva) + especiales y trampas CURADOS del golden activo (verificados, no derivan). v1.2: 0 cuentas madre (todas ...0002); SIN-19/21 doble asiento; SIN-22..25 ciclo leasing/renting.",
+    "tolerancia_importe": 0.01
+  },
+  "asientos": [
+    {
+      "id": "VEN-43000002",
+      "fuente": "VEN-43000002.txt",
+      "subtipo": "venta",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "43000002",
+          "debe": 13987.6,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "70000002",
+          "debe": 0.0,
+          "haber": 11560.0
+        },
+        {
+          "cuenta": "47700002",
+          "debe": 0.0,
+          "haber": 2427.6
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "base": 11560.0,
+        "iva": 2427.6,
+        "total": 13987.6,
+        "fecha": "2026-05-02"
+      },
+      "reto": null,
+      "documento_fisico": true
+    },
+    {
+      "id": "COM-40000002",
+      "fuente": "COM-40000002.txt",
+      "subtipo": "compra",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "60000002",
+          "debe": 9000.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "47200002",
+          "debe": 1890.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "40000002",
+          "debe": 0.0,
+          "haber": 10890.0
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "base": 9000.0,
+        "iva": 1890.0,
+        "total": 10890.0,
+        "fecha": "2026-05-03"
+      },
+      "reto": null,
+      "documento_fisico": true
+    },
+    {
+      "id": "NOM-46500002",
+      "fuente": "NOM-46500002.txt",
+      "subtipo": "nomina",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "64000002",
+          "debe": 2700.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "64200002",
+          "debe": 807.3,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "47600002",
+          "debe": 0.0,
+          "haber": 978.75
+        },
+        {
+          "cuenta": "47510002",
+          "debe": 0.0,
+          "haber": 499.5
+        },
+        {
+          "cuenta": "46500002",
+          "debe": 0.0,
+          "haber": 2029.05
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "neto": 2029.05,
+        "fecha": "2026-05-29"
+      },
+      "reto": null,
+      "documento_fisico": true
+    },
+    {
+      "id": "FAC-23",
+      "fuente": "23_abono_negativo.pdf",
+      "subtipo": "devolucion_venta",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "70800002",
+          "debe": 450.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "47700002",
+          "debe": 94.5,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "43000002",
+          "debe": 0,
+          "haber": 544.5
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "base": 450.0,
+        "iva": 94.5,
+        "total": 544.5
+      },
+      "reto": "abono negativo = devolución (708), no venta"
+    },
+    {
+      "id": "NEW-01",
+      "fuente": "NEW_01_cliente_nuevo.pdf",
+      "subtipo": "venta_cliente_nuevo",
+      "accion_esperada": "revisar",
+      "asiento_esperado": null,
+      "motivo_flag": "TERCERO_NO_REGISTRADO",
+      "campos_clave": {},
+      "reto": "cliente nuevo -> alta siguiente ID libre 43000004",
+      "nota_r14": "tercero no en catalogo -> enjambre frena (PASO 0). Ver DIAGNOSTICO."
+    },
+    {
+      "id": "OCR-01",
+      "fuente": "OCR_01_legible_dificil.pdf",
+      "subtipo": "gasto_suministros_escaneado",
+      "accion_esperada": "revisar",
+      "asiento_esperado": null,
+      "motivo_flag": "ILEGIBLE",
+      "campos_clave": {
+        "base": 520.0,
+        "iva": 109.2,
+        "total": 629.2
+      },
+      "reto": "Documento sin texto extraíble (la capa OCR externa no devolvió texto) -> extraction_failed -> revisar. El enjambre NO hace OCR.",
+      "nota_r14": "sin texto post-OCR -> extraction_failed. El enjambre no hace OCR."
+    },
+    {
+      "id": "MKT-01",
+      "fuente": "MKT_01_miravia_liquidacion.pdf",
+      "subtipo": "liquidacion_marketplace_iva",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "57200002",
+          "debe": 5445.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "62900002",
+          "debe": 500.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "47200002",
+          "debe": 105.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "70000002",
+          "debe": 0,
+          "haber": 5000.0
+        },
+        {
+          "cuenta": "47700002",
+          "debe": 0,
+          "haber": 1050.0
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "ventas_base": 5000.0,
+        "iva_rep": 1050.0,
+        "comision": 500.0,
+        "neto": 5445.0
+      },
+      "reto": "liquidación: registrar venta BRUTA + comisión, NO el neto del extracto (5.445)"
+    },
+    {
+      "id": "SIN-22",
+      "fuente": "alta_leasing",
+      "subtipo": "financiero",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "21800002",
+          "debe": 24000.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "52400002",
+          "debe": 0.0,
+          "haber": 6000.0
+        },
+        {
+          "cuenta": "17400002",
+          "debe": 0.0,
+          "haber": 18000.0
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "valor_contado": 24000.0,
+        "principal_cp": 6000.0,
+        "principal_lp": 18000.0
+      },
+      "reto": "alta leasing: activar bien en 21800002 (valor al contado, SIN IVA); deuda CP 52400002 (vence <=12 meses) + deuda LP 17400002 (resto principal + residual). Cuadre: 24000 = 6000 + 18000."
+    },
+    {
+      "id": "SIN-25",
+      "fuente": "opcion_compra_leasing",
+      "subtipo": "financiero",
+      "accion_esperada": "contabilizar",
+      "asiento_esperado": [
+        {
+          "cuenta": "52400002",
+          "debe": 1000.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "47200002",
+          "debe": 210.0,
+          "haber": 0.0
+        },
+        {
+          "cuenta": "41000009",
+          "debe": 0.0,
+          "haber": 1210.0
+        }
+      ],
+      "motivo_flag": null,
+      "campos_clave": {
+        "valor_residual": 1000.0,
+        "iva": 210.0,
+        "total": 1210.0
+      },
+      "reto": "opcion de compra DEVENGO (doble asiento): valor residual cancela 52400002; IVA 21% s/residual->472; acreedor financiera->41000009. El bien ya esta en 21800002 desde el alta: sin nuevo activo ni traspaso de amortizacion."
+    }
+  ]
+}
