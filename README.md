@@ -117,6 +117,16 @@ Este enjambre nació de [llm-eval-contable](https://github.com/jleonceo/llm-eval
 la evaluación de una sola skill contable (50 casos, de 66% a 100% en 6 iteraciones).
 Allí está explicado desde cero qué es una skill y por qué hay que examinarla.
 
+## Repos relacionados
+
+Este enjambre es una pieza de un trabajo mayor sobre sistemas con varios agentes. Las piezas hermanas:
+
+- [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia): el enrutado, cómo se decide a qué agente va cada petición sin romper al crecer.
+- [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): el método que gobierna a este enjambre, con golden sets y puertas de no-regresión.
+- [verificacion-determinista-ia](https://github.com/jleonceo/verificacion-determinista-ia): el guardarraíl que recomprueba la coherencia de los datos sin IA.
+- [agent-memory-governance](https://github.com/jleonceo/agent-memory-governance): que la memoria del agente no se convierta en un vertedero.
+- [tu-primer-asistente-ia-web](https://github.com/jleonceo/tu-primer-asistente-ia-web): qué es un asistente de IA, para quien empieza de cero.
+
 ---
 
 Construido por [Juan Luis León Rodríguez](https://juanluisleon.vercel.app) · mayo-junio 2026
