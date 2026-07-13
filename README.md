@@ -1,6 +1,6 @@
 # accounting-agent-swarm
 
-Enjambre de tres agentes Claude para automatizar contabilidad real, desarrollado con
+Enjambre de cuatro agentes Claude para automatizar contabilidad real, desarrollado con
 evaluación continua: golden set, corrector automático, puertas de no-regresión y
 verificador independiente.
 
@@ -15,7 +15,7 @@ verificador independiente.
 Diecinueve simulaciones medidas entre mayo y junio de 2026, sobre tres exámenes cada vez
 más duros. Lo que más me ha enseñado este proyecto no son los récords, son las caídas.
 
-Las tres peores notas de la curva (32,1 · 35,4 · 57,1) no las causó el enjambre. Las causó
+Las tres grandes caídas de la curva (32,1 · 35,4 · 57,1) no las causó el enjambre. Las causó
 el examen: un bug del harness que no parseaba la salida del validador, un runner que colapsó
 a mitad de ejecución dejando 56 casos sin respuesta, un golden set que se había quedado
 desincronizado con la base de datos. El enjambre no empeoró 65 puntos en un día: lo que se
@@ -80,9 +80,11 @@ son la misma cosa. Con el banco por fin fiable, la nota volvió a medir al enjam
 | Conciliación (casación contra MySQL vivo) | 79/79 = 100% |
 | Falsos positivos (asientos erróneos colados) | **0** |
 
-Nota global: **93,3/100**, y la decisión de cerrar ahí. Los seis casos que quedan abiertos
+Nota global: **93,3/100**, y la decisión de cerrar ahí. Los cinco casos que quedan abiertos
 son casos límite (la opción de compra de un leasing, un asiento de apertura) y variabilidad
-del modelo; están documentados caso a caso en [evidencia/](evidencia/), sin maquillar.
+del modelo; están documentados caso a caso en [evidencia/](evidencia/), sin maquillar. Un
+sexto, la liquidación de IVA como doble asiento, se cerró y verificó el 13/06 en un run
+acotado (4/4).
 Perseguirlos uno a uno es el bucle de rendimientos decrecientes.
 
 Un detalle del cierre que resume el método: en RUN3, el validador frenó dos asientos
@@ -108,7 +110,7 @@ index.html · styles.css · script.js  ← la landing (capítulo de mayo)
 ```
 
 Los datos son de TechAcces SL, una empresa **ficticia** creada para este proyecto: ~17.000
-líneas de diario en MySQL, tres ejercicios contables, terceros y nóminas sintéticos.
+líneas de diario en MySQL, cuatro ejercicios (tres cerrados y el vivo), terceros y nóminas sintéticos.
 El problema contable es real; el dinero no.
 
 ## El capítulo anterior
@@ -131,4 +133,4 @@ Este enjambre es una pieza de un trabajo mayor sobre sistemas con varios agentes
 
 ---
 
-Construido por [Juan Luis León Rodríguez](https://juanluisleon.vercel.app) · mayo-junio 2026
+Construido por [Juan Luis León Rodríguez](https://juanluisleon.vercel.app) · mayo-junio 2026 · Licencia [MIT](LICENSE)
