@@ -6,9 +6,13 @@ verificador independiente.
 
 → Página del proyecto: **[jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)** (el capítulo de mayo)
 
+[Español](#español) · [English](#english)
+
 ---
 
-## La historia en una imagen
+## Español
+
+### La historia en una imagen
 
 ![Curva de las 19 simulaciones](assets/curva_runs.png)
 
@@ -24,7 +28,7 @@ rompió fue el instrumento de medida.
 Esa es la lección que me llevo: **cuando evalúas un sistema LLM, el banco de pruebas falla
 más a menudo que el sistema**. Si solo miras la última nota, te cuentas una historia equivocada.
 
-## Qué hace el enjambre
+### Qué hace el enjambre
 
 Cuatro agentes especializados, cada uno con su skill:
 
@@ -41,7 +45,7 @@ extracto bancario     → PUNTEADOR → conciliación contra MySQL vivo
 El enjambre **propone, no ejecuta**: los asientos van a una tabla de borradores y los
 inserta un humano tras revisarlos. La autonomía es proporcional al riesgo de reversibilidad.
 
-## Cómo se mide
+### Cómo se mide
 
 Un corrector automático en Python puntúa cada simulación contra un golden set de respuestas
 esperadas, en cinco ejes: acción correcta (¿contabilizar o frenar?), asiento exacto (cuentas
@@ -51,7 +55,7 @@ correcto) y conciliación bancaria (casación contra la base de datos en vivo, n
 La regla que lo gobierna todo: **la simulación se adapta al sistema, nunca el sistema a la
 simulación**. Ningún golden, skill o dato se toca para que un test pase.
 
-## Las tres épocas
+### Las tres épocas
 
 **1. El ciclo Python (mayo, 63 casos).** De 55,7 a 97,0 en seis iteraciones. Cada regresión
 enseñó algo concreto: una nota demasiado amplia en un prompt afecta a casos que no eran el
@@ -69,7 +73,7 @@ nacen del mismo manifest**. El golden ya no puede desincronizarse de los datos p
 son la misma cosa. Con el banco por fin fiable, la nota volvió a medir al enjambre: 72,4 →
 88,6 → 87,1 → **93,3**.
 
-## El estado actual (cierre, 13/06/2026)
+### El estado actual (cierre, 13/06/2026)
 
 | Eje | Resultado |
 |---|---|
@@ -93,7 +97,7 @@ crear 4 cuentas. Verificado contra MySQL: las 4 existían. El que fallaba era el
 que se las inventaba. Desde entonces tiene prohibido afirmar que una cuenta no existe sin
 ejecutar la consulta. No fiarse del primer agente; verificar contra la fuente.
 
-## Qué hay en este repo
+### Qué hay en este repo
 
 ```
 evidencia/
@@ -113,13 +117,13 @@ Los datos son de TechAcces SL, una empresa **ficticia** creada para este proyect
 líneas de diario en MySQL, cuatro ejercicios (tres cerrados y el vivo), terceros y nóminas sintéticos.
 El problema contable es real; el dinero no.
 
-## El capítulo anterior
+### El capítulo anterior
 
 Este enjambre nació de [llm-eval-contable](https://github.com/jleonceo/llm-eval-contable):
 la evaluación de una sola skill contable (50 casos, de 66% a 100% en 6 iteraciones).
 Allí está explicado desde cero qué es una skill y por qué hay que examinarla.
 
-## Repos relacionados
+### Repos relacionados
 
 Este enjambre es una pieza de un trabajo mayor sobre sistemas con varios agentes. Las piezas hermanas:
 
@@ -133,4 +137,136 @@ Este enjambre es una pieza de un trabajo mayor sobre sistemas con varios agentes
 
 ---
 
-Construido por [Juan Luis León Rodríguez](https://juanluisleon.vercel.app) · mayo-junio 2026 · Licencia [MIT](LICENSE)
+## English
+
+A swarm of four Claude agents that automates real accounting, built around continuous
+evaluation: a golden set, an automatic grader, no-regression gates and an independent verifier.
+
+→ Project page: **[jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)** (the May chapter)
+
+### The story in one picture
+
+![Curve of the 19 runs](assets/curva_runs.png)
+
+Nineteen runs measured between May and June 2026, against three exams that kept getting
+harder. What taught me most here was not the records. It was the drops.
+
+The three big dips in the curve (32.1, 35.4, 57.1) were not the swarm's doing. The exam caused
+them: a harness bug that failed to parse the validator's output, a runner that died halfway
+through and left 56 cases unanswered, a golden set that had drifted out of sync with the
+database. The swarm did not get 65 points worse overnight. What broke was the measuring
+instrument.
+
+That is the lesson I take away: **when you evaluate an LLM system, the test bench fails more
+often than the system does**. Look only at the latest score and you will tell yourself the
+wrong story.
+
+### What the swarm does
+
+Four specialised agents, one skill each:
+
+```
+document (.pdf/.txt) → EXTRACTOR → json → GENERATOR → entry → VALIDATOR → draft / review
+bank statement       → RECONCILER → matched against live MySQL
+```
+
+- **extractor-contable**: reads invoices, payslips and bank statements, and returns structured JSON. If a document is illegible it says so instead of inventing content.
+- **generador-contable**: turns that JSON into a complete journal entry under the Spanish chart of accounts (PGC 2007), using the company's own accounts.
+- **validador-contable**: checks that the entry balances, and checks integrity and coherence. It decides whether the entry goes through or gets held for manual review.
+- **punteador-contable**: reconciles the bank statement against the live MySQL journal, line by line.
+
+The swarm **proposes, it does not post**: entries land in a drafts table and a person inserts
+them after reviewing. Autonomy is proportional to how reversible the action is.
+
+### How it is measured
+
+A Python grader scores every run against a golden set of expected answers, on five axes: the
+right call (post it or hold it?), the exact entry (accounts and amounts to the cent), whether
+it balances, the quality of the hold (holding is only right if the reason is right too) and
+bank reconciliation (matching against the live database, not against a file).
+
+The rule that governs everything else: **the simulation adapts to the system, never the system
+to the simulation**. No golden, skill or piece of data gets touched to make a test pass.
+
+### Three eras
+
+**1. The Python cycle (May, 63 cases).** From 55.7 to 97.0 over six iterations. Every
+regression taught something specific: a note written too broadly in a prompt reaches cases it
+was never aimed at, and describing the logic is not enough, you have to state the expected
+action. This is the chapter the [landing page](https://jleonceo.github.io/accounting-agent-swarm) tells.
+
+**2. The valley (early June, 80 cases).** The exam grew and broke several times over: a buggy
+harness, a golden out of sync, a grader that introduced false positives. Weeks spent fixing the
+measuring instrument rather than the system being measured. Frustrating at the time and, seen
+from a distance, the most valuable part of the project.
+
+**3. The Factory (June, 121-128 cases).** The structural fix for the valley: a synthetic
+document generator where **the document, the expected entry and the bank movement all come out
+of the same manifest**. The golden can no longer drift from the data, because they are the same
+thing. With a trustworthy bench at last, the score went back to measuring the swarm: 72.4 →
+88.6 → 87.1 → **93.3**.
+
+### Where it stands (closed 13/06/2026)
+
+| Axis | Result |
+|---|---|
+| Right call (post vs review) | 125/128 = 97.7% |
+| Exact entry (accounts + amounts) | 81/84 = 96.4% |
+| Proposed entries that balance | 84/84 = 100% |
+| Held it for the right reason | 33/41 = 80.5% |
+| Reconciliation (matched against live MySQL) | 79/79 = 100% |
+| False positives (bad entries slipping through) | **0** |
+
+Overall score: **93.3/100**, and the call to stop there. The five cases still open are edge
+cases (the purchase option on a lease, an opening entry) plus model variability, and they are
+documented one by one in [evidencia/](evidencia/), with nothing dressed up. A sixth, the VAT
+settlement as a double entry, was closed and verified on 13/06 in a narrow run (4/4).
+Chasing them one at a time is the diminishing-returns loop.
+
+One detail from the close sums up the method: in RUN3 the validator held two entries, claiming
+their accounts "did not exist". A first analysis believed it and concluded that 4 accounts had
+to be created. Checked against MySQL: all 4 were already there. The validator was the one
+failing, making them up. Since then it is not allowed to claim an account does not exist
+without running the query. Do not take the first agent's word; check against the source.
+
+### What is in this repo
+
+```
+evidencia/
+  registro_de_runs.md            ← the 19 runs, one by one, with their real cause
+  2026-06-11-RUN1_informe.md     ← the grader's reports, exactly as they came out
+  2026-06-12-RUN3_analisis_fallos.md
+  2026-06-12-RUN4_informe.md
+  2026-06-12-RUN4_cambios_y_tail.md  ← what changed and what did NOT get closed (honest)
+eval/
+  eval_enjambre_fabrica.js       ← the actual runner (local paths sanitised)
+  golden_muestra.json            ← 9 representative cases from the golden set of 128
+assets/curva_runs.png
+index.html · styles.css · script.js  ← the landing page (the May chapter)
+```
+
+The data belongs to TechAcces SL, a **fictional** company created for this project: about
+17,000 journal lines in MySQL, four financial years (three closed and the live one), synthetic
+counterparties and payslips. The accounting problem is real; the money is not.
+
+### The previous chapter
+
+This swarm grew out of [llm-eval-contable](https://github.com/jleonceo/llm-eval-contable): the
+evaluation of a single accounting skill (50 cases, from 66% to 100% over 6 iterations). That
+repo explains from scratch what a skill is and why it has to be examined.
+
+### Related repositories
+
+This swarm is one piece of a wider body of work on multi-agent systems. Its sibling pieces:
+
+- [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia): the routing, how a system decides which agent handles each request without breaking as it grows.
+- [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): the method that governs this swarm, with golden sets and no-regression gates.
+- [verificacion-determinista-ia](https://github.com/jleonceo/verificacion-determinista-ia): the guardrail that rechecks the coherence of the data without AI.
+- [agent-memory-governance](https://github.com/jleonceo/agent-memory-governance): keeping the agent's memory from turning into a junkyard.
+- [tu-primer-asistente-ia-web](https://github.com/jleonceo/tu-primer-asistente-ia-web): what an AI assistant is, for absolute beginners.
+- [tesoreria-forecast-ia](https://github.com/jleonceo/tesoreria-forecast-ia): cash-flow forecasting by decomposition with backtesting, plus ratios and aging.
+- [control-interno-fraude-ia](https://github.com/jleonceo/control-interno-fraude-ia): accounting fraud detection with arithmetic, inside an internal-control framework.
+
+---
+
+Construido por / Built by [Juan Luis León Rodríguez](https://juanluisleon.vercel.app) · mayo-junio 2026 · Licencia / License: [MIT](LICENSE)
