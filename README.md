@@ -139,7 +139,7 @@ Este enjambre es una pieza de un trabajo mayor sobre sistemas con varios agentes
 
 ## English
 
-A swarm of four Claude agents that automates real accounting, built around continuous
+A swarm of four Claude agents for automating real accounting, built around continuous
 evaluation: a golden set, an automatic grader, no-regression gates and an independent verifier.
 
 → Project page: **[jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)** (the May chapter)
@@ -148,8 +148,8 @@ evaluation: a golden set, an automatic grader, no-regression gates and an indepe
 
 ![Curve of the 19 runs](assets/curva_runs.png)
 
-Nineteen runs measured between May and June 2026, against three exams that kept getting
-harder. What taught me most here was not the records. It was the drops.
+Nineteen runs across May and June 2026, against three exams that kept getting
+harder. What taught me most here wasn't the high scores. It was the drops.
 
 The three big dips in the curve (32.1, 35.4, 57.1) were not the swarm's doing. The exam caused
 them: a harness bug that failed to parse the validator's output, a runner that died halfway
@@ -157,7 +157,7 @@ through and left 56 cases unanswered, a golden set that had drifted out of sync 
 database. The swarm did not get 65 points worse overnight. What broke was the measuring
 instrument.
 
-That is the lesson I take away: **when you evaluate an LLM system, the test bench fails more
+That is the lesson I take away: **when you evaluate an LLM system, the test harness fails more
 often than the system does**. Look only at the latest score and you will tell yourself the
 wrong story.
 
@@ -175,7 +175,7 @@ bank statement       → RECONCILER → matched against live MySQL
 - **validador-contable**: checks that the entry balances, and checks integrity and coherence. It decides whether the entry goes through or gets held for manual review.
 - **punteador-contable**: reconciles the bank statement against the live MySQL journal, line by line.
 
-The swarm **proposes, it does not post**: entries land in a drafts table and a person inserts
+The swarm **proposes; it does not post**: entries land in a drafts table and a person inserts
 them after reviewing. Autonomy is proportional to how reversible the action is.
 
 ### How it is measured
@@ -192,7 +192,7 @@ to the simulation**. No golden, skill or piece of data gets touched to make a te
 
 **1. The Python cycle (May, 63 cases).** From 55.7 to 97.0 over six iterations. Every
 regression taught something specific: a note written too broadly in a prompt reaches cases it
-was never aimed at, and describing the logic is not enough, you have to state the expected
+was never aimed at, and describing the logic is not enough: you have to state the expected
 action. This is the chapter the [landing page](https://jleonceo.github.io/accounting-agent-swarm) tells.
 
 **2. The valley (early June, 80 cases).** The exam grew and broke several times over: a buggy
@@ -203,7 +203,7 @@ from a distance, the most valuable part of the project.
 **3. The Factory (June, 121-128 cases).** The structural fix for the valley: a synthetic
 document generator where **the document, the expected entry and the bank movement all come out
 of the same manifest**. The golden can no longer drift from the data, because they are the same
-thing. With a trustworthy bench at last, the score went back to measuring the swarm: 72.4 →
+thing. With the harness finally trustworthy, the score went back to measuring the swarm: 72.4 →
 88.6 → 87.1 → **93.3**.
 
 ### Where it stands (closed 13/06/2026)
@@ -221,7 +221,7 @@ Overall score: **93.3/100**, and the call to stop there. The five cases still op
 cases (the purchase option on a lease, an opening entry) plus model variability, and they are
 documented one by one in [evidencia/](evidencia/), with nothing dressed up. A sixth, the VAT
 settlement as a double entry, was closed and verified on 13/06 in a narrow run (4/4).
-Chasing them one at a time is the diminishing-returns loop.
+Chasing them one by one is where diminishing returns set in.
 
 One detail from the close sums up the method: in RUN3 the validator held two entries, claiming
 their accounts "did not exist". A first analysis believed it and concluded that 4 accounts had
