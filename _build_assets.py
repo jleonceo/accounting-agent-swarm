@@ -48,6 +48,16 @@ runs = [
     ("RUN1",   88.6, 2, False),
     ("RUN3",   87.1, 2, False),
     ("RUN4",   93.3, 2, False),
+    # --- AMPLIACION 21/07/2026: la historia siguio despues de que este repo se publicara ---
+    # OJO CON LAS ETIQUETAS. Los cuatro puntos de abajo vienen del registro canonico
+    # (`Manual_Preparacion_Simulaciones_Enjambre_TechAcces.md`), que numera con OTRA serie: su
+    # RUN3 es este RUN4 de aqui (misma corrida, freno-bien 80,5% en las dos, global re-puntuado
+    # de 93,3 a 93,7). Para no tener dos "RUN4" que dicen cosas distintas, los nuevos van
+    # etiquetados POR FECHA. Es feo y es honesto: renumerar el pasado publicado seria peor.
+    ("21jun",  87.2, 2, True),     # deflactada: el golden aun esperaba la SS sin partir
+    ("24jun",  93.2, 2, False),
+    ("27jun",  94.2, 2, False),    # mejor marca hasta hoy
+    ("20jul",  79.4, 2, True),     # banco AMPLIADO a 129 asientos + 10 extractos, no comparable
 ]
 
 AZUL  = "#2563eb"   # nota del enjambre
@@ -101,7 +111,16 @@ plt.savefig("assets/curva_runs.png", bbox_inches="tight")
 print("OK assets/curva_runs.png")
 
 # ── Muestra del golden (casos representativos, no el banco completo) ──
-SRC = r"C:\PROYECTOS_GITHUB\TechAcces\Fabrica_Documentos\golden_fabrica_completo.json"
+# El banco completo NO vive en este repo (es interno). La ruta se pasa por entorno para que el
+# fichero no lleve una ruta de mi maquina dentro, que es lo que caza el escaner de repos
+# publicos y lo que rompe el script para cualquier otro. Sin la variable, el script avisa y
+# deja la muestra como esta en vez de reventar: quien clone esto solo quiere la curva.
+SRC = os.environ.get("GOLDEN_FABRICA")
+if not SRC or not os.path.isfile(SRC):
+    print("AVISO: sin GOLDEN_FABRICA apuntando al banco completo, la muestra no se regenera.")
+    print("       (la curva de arriba SI se ha regenerado). Uso:")
+    print("       set GOLDEN_FABRICA=<ruta>\golden_fabrica_completo.json && python _build_assets.py")
+    raise SystemExit(0)
 g = json.load(open(SRC, encoding="utf-8"))
 ids_muestra = []
 prefijos = ["VEN-", "COM-", "NOM-", "FAC-23", "SIN-22", "SIN-25", "MKT-", "OCR-", "NEW-"]

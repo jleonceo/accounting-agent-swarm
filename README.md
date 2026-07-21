@@ -14,9 +14,9 @@ verificador independiente.
 
 ### La historia en una imagen
 
-![Curva de las 19 simulaciones](assets/curva_runs.png)
+![Curva de las simulaciones](assets/curva_runs.png)
 
-Diecinueve simulaciones medidas entre mayo y junio de 2026, sobre tres exámenes cada vez
+Veintitrés simulaciones medidas entre mayo y julio de 2026, sobre tres exámenes cada vez
 más duros. Lo que más me ha enseñado este proyecto no son los récords, son las caídas.
 
 Las tres grandes caídas de la curva (32,1 · 35,4 · 57,1) no las causó el enjambre. Las causó
@@ -73,7 +73,7 @@ nacen del mismo manifest**. El golden ya no puede desincronizarse de los datos p
 son la misma cosa. Con el banco por fin fiable, la nota volvió a medir al enjambre: 72,4 →
 88,6 → 87,1 → **93,3**.
 
-### El estado actual (cierre, 13/06/2026)
+### Dónde quedó el cierre de junio (13/06/2026)
 
 | Eje | Resultado |
 |---|---|
@@ -90,6 +90,37 @@ del modelo; están documentados caso a caso en [evidencia/](evidencia/), sin maq
 sexto, la liquidación de IVA como doble asiento, se cerró y verificó el 13/06 en un run
 acotado (4/4).
 Perseguirlos uno a uno es el bucle de rendimientos decrecientes.
+
+### Lo que pasó después, que es la parte incómoda
+
+Este repo se publicó dando el trabajo por cerrado en 93,3. La curva de arriba llega ahora hasta
+julio, y el final no es el que uno querría enseñar.
+
+| Cuándo | Nota | Qué pasó |
+|---|---|---|
+| 21 jun | 87,2 | Bajada aparente. El enjambre había mejorado y el examen se quedó viejo: la doctrina partió la cuota de Seguridad Social en dos cuentas y el golden seguía esperándola junta. Quince de los dieciséis fallos de asiento eran eso. |
+| 24 jun | 93,2 | Golden sincronizado. Recuperado. |
+| 27 jun | **94,2** | Mejor marca. Pipeline completo, con la última milla en simulacro. |
+| 20 jul | **79,4** | El examen creció a 129 asientos más 10 extractos. **No es comparable con los anteriores**, y dos de los fallos son del tipo grave: contabilizó documentos que debía haber frenado. |
+
+Tres cosas que aprender de esa tabla, y ninguna es agradable:
+
+**Una nota que baja no siempre significa que el sistema empeore.** La caída del 21 de junio fue
+del examen, no del examinado. Diagnosticarlo al revés habría llevado a "arreglar" un enjambre que
+funcionaba bien.
+
+**Y una nota que sube tampoco garantiza nada.** El 94,2 se midió sobre un banco más pequeño.
+Ampliarlo sacó fallos que estaban ahí desde antes y que ningún examen anterior tocaba.
+
+**La numeración de las corridas no es continua.** Este repo cuenta su historia con etiquetas
+propias hasta junio; los puntos posteriores van fechados porque el registro interno del proyecto
+usa otra serie, y renumerar hacia atrás lo publicado sería peor que la incomodidad de mezclar dos
+formas de etiquetar. Lo que este repo llama la corrida de 93,3 es la que el registro interno
+puntúa 93,7: misma corrida, mismo 80,5% de frenó-bien, global repuntuado.
+
+*La muestra del golden que acompaña a este repo (`eval/golden_muestra.json`) se ha regenerado con
+la doctrina vigente: la cuota de Seguridad Social va partida en dos cuentas. La versión anterior
+la traía junta, que es como se contabilizaba antes del 21 de junio.*
 
 Un detalle del cierre que resume el método: en RUN3, el validador frenó dos asientos
 alegando que sus cuentas "no existían". Un primer análisis le creyó y concluyó que faltaba
