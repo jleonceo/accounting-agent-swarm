@@ -55,6 +55,13 @@ correcto) y conciliación bancaria (casación contra la base de datos en vivo, n
 La regla que lo gobierna todo: **la simulación se adapta al sistema, nunca el sistema a la
 simulación**. Ningún golden, skill o dato se toca para que un test pase.
 
+> **Aviso de convención, porque aquí las dos palabras van al revés de lo corriente.** En los informes
+> de `evidencia/`, **falso positivo** es contabilizar un documento que había que frenar, y **falso
+> negativo** es frenar uno que estaba bien. El positivo de este corrector es *contabilizar* en vez de
+> *dar la alarma*, de donde sale la inversión respecto al uso habitual en detección. Otros repositorios de
+> esta misma cuenta, como `pii-output-gate`, siguen la convención de siempre. Se declara en vez de
+> corregirse porque cambiar las etiquetas rompería la trazabilidad con las RUN ya cerradas.
+
 ### Las tres épocas
 
 **1. El ciclo Python (mayo, 63 casos).** De 55,7 a 97,0 en seis iteraciones. Cada regresión
@@ -91,10 +98,10 @@ sexto, la liquidación de IVA como doble asiento, se cerró y verificó el 13/06
 acotado (4/4).
 Perseguirlos uno a uno es el bucle de rendimientos decrecientes.
 
-### Lo que pasó después, que es la parte incómoda
+### La parte incómoda: lo que pasó después
 
 Este repo se publicó dando el trabajo por cerrado en 93,3. La curva de arriba llega ahora hasta
-julio, y el final no es el que uno querría enseñar.
+julio y termina donde a nadie le gusta enseñar.
 
 | Cuándo | Nota | Qué pasó |
 |---|---|---|
