@@ -30,6 +30,13 @@ más a menudo que el sistema**. Si solo miras la última nota, te cuentas una hi
 
 ### Qué hace el enjambre
 
+**Agente** es aquí el mismo motor de IA con un papel estrecho y unas instrucciones propias, que en la
+jerga del proyecto se llaman *skill*. Por dentro el motor es idéntico en los cuatro; cambian el
+papel, lo que tiene permitido y lo que se le exige devolver.
+
+Que sean cuatro y no uno tiene una razón: el que juzga no puede ser el que produjo. Pedirle a un
+modelo que revise su propio asiento es pedirle que dude del criterio con el que acaba de decidir.
+
 Cuatro agentes especializados, cada uno con su skill:
 
 ```
@@ -47,8 +54,11 @@ inserta un humano tras revisarlos. La autonomía es proporcional al riesgo de re
 
 ### Cómo se mide
 
-Un corrector automático en Python puntúa cada simulación contra un golden set de respuestas
-esperadas, en cinco ejes: acción correcta (¿contabilizar o frenar?), asiento exacto (cuentas
+Un **golden set** es una lista de casos con la respuesta correcta escrita de antemano. Sin esa lista
+escrita ANTES, la nota la pone quien mira los resultados, y quien mira los resultados ya sabe lo que
+esperaba encontrar.
+
+Un corrector automático en Python puntúa cada simulación contra ese golden set, en cinco ejes: acción correcta (¿contabilizar o frenar?), asiento exacto (cuentas
 e importes al céntimo), cuadre, calidad del freno (frenar está bien solo si el motivo es el
 correcto) y conciliación bancaria (casación contra la base de datos en vivo, no contra un fichero).
 
@@ -70,13 +80,13 @@ objetivo; describir la lógica no basta, hay que decir la acción esperada. Es e
 cuenta la [landing](https://jleonceo.github.io/accounting-agent-swarm).
 
 **2. El valle (principios de junio, 80 casos).** El examen creció y se rompió varias veces:
-harness con bugs, golden desincronizado, corrector que metía falsos positivos. Semanas de
+fallos en el programa que gobierna el examen, un golden desincronizado con la base de datos, un corrector que marcaba errores donde no los había. Semanas de
 arreglar el instrumento de medida más que el sistema medido. Frustrante y, visto con
 distancia, la parte más valiosa del proyecto.
 
 **3. La Fábrica (junio, 121-128 casos).** La solución estructural al valle: un generador de
 documentos sintéticos donde **el documento, el asiento esperado y el movimiento bancario
-nacen del mismo manifest**. El golden ya no puede desincronizarse de los datos porque ambos
+nacen de la misma ficha de origen**. El golden ya no puede desincronizarse de los datos porque ambos
 son la misma cosa. Con el banco por fin fiable, la nota volvió a medir al enjambre: 72,4 →
 88,6 → 87,1 → **93,3**.
 
@@ -201,6 +211,13 @@ wrong story.
 
 ### What the swarm does
 
+**Agent** here means the same AI engine given a narrow role and its own instructions, called a
+*skill* in this project's jargon. The engine is identical in all four; what changes is the role,
+what each one is allowed to do and what it must return.
+
+There is a reason for four instead of one: whoever judges cannot be whoever produced. Asking a model
+to review its own entry is asking it to doubt the criterion it just applied.
+
 Four specialised agents, one skill each:
 
 ```
@@ -218,7 +235,11 @@ them after reviewing. Autonomy is proportional to how reversible the action is.
 
 ### How it is measured
 
-A Python grader scores every run against a golden set of expected answers, on five axes: the
+A **golden set** is a list of cases with the right answer written beforehand. Without that list
+written BEFORE, the score is set by whoever reads the results, and whoever reads the results already
+knows what they expected to find.
+
+A Python grader scores every run against that golden set, on five axes: the
 right call (post it or hold it?), the exact entry (accounts and amounts to the cent), whether
 it balances, the quality of the hold (holding is only right if the reason is right too) and
 bank reconciliation (matching against the live database, not against a file).
