@@ -129,11 +129,11 @@ funcionaba bien.
 **Y una nota que sube tampoco garantiza nada.** El 94,2 se midió sobre un banco más pequeño.
 Ampliarlo sacó fallos que estaban ahí desde antes y que ningún examen anterior tocaba.
 
-**La numeración de las corridas no es continua.** Este repo cuenta su historia con etiquetas
+**La numeración de las rondas no es continua.** Este repo cuenta su historia con etiquetas
 propias hasta junio; los puntos posteriores van fechados porque el registro interno del proyecto
 usa otra serie, y renumerar hacia atrás lo publicado sería peor que la incomodidad de mezclar dos
-formas de etiquetar. Lo que este repo llama la corrida de 93,3 es la que el registro interno
-puntúa 93,7: misma corrida, mismo 80,5% de frenó-bien, global repuntuado.
+formas de etiquetar. Lo que este repo llama la ronda de 93,3 es la que el registro interno
+puntúa 93,7: misma ronda, mismo 80,5% de frenó-bien, global repuntuado.
 
 *La muestra del golden que acompaña a este repo (`eval/golden_muestra.json`) se ha regenerado con
 la doctrina vigente: la cuota de Seguridad Social va partida en dos cuentas. La versión anterior

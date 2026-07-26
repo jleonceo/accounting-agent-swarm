@@ -51,7 +51,7 @@ runs = [
     # --- AMPLIACION 21/07/2026: la historia siguio despues de que este repo se publicara ---
     # OJO CON LAS ETIQUETAS. Los cuatro puntos de abajo vienen del registro canonico
     # (`Manual_Preparacion_Simulaciones_Enjambre_TechAcces.md`), que numera con OTRA serie: su
-    # RUN3 es este RUN4 de aqui (misma corrida, freno-bien 80,5% en las dos, global re-puntuado
+    # RUN3 es este RUN4 de aqui (misma ronda, freno-bien 80,5% en las dos, global re-puntuado
     # de 93,3 a 93,7). Para no tener dos "RUN4" que dicen cosas distintas, los nuevos van
     # etiquetados POR FECHA. Es feo y es honesto: renumerar el pasado publicado seria peor.
     ("21jun",  87.2, 2, True),     # deflactada: el golden aun esperaba la SS sin partir
