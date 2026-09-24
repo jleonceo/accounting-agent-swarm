@@ -7,23 +7,23 @@
 ## Clasificación verificada de los fallos
 
 ### Extractor: variabilidad (no es el banco)
-- **ACR-41000002 / 03 / 05**: el extractor cortó su propio JSON (raw truncado, confianza 0) en 3 de 8 ACR. Los `.txt` están **perfectos** (819 bytes, legibles, idénticos a los ACR que sí pasaron). → **Variabilidad del modelo extractor**, no defecto del documento. Mitigación: blindar la instrucción de salida del extractor / reintento ante extraction_failed.
+- **ACR-41000002 / 03 / 05**: el extractor cortó su propio JSON (raw truncado, confianza 0) en 3 de 8 ACR. Los `.txt` están perfectos (819 bytes, legibles, idénticos a los ACR que sí pasaron). → **Variabilidad del modelo extractor**, no defecto del documento. Mitigación: blindar la instrucción de salida del extractor / reintento ante extraction_failed.
 
 ### Generador: cuenta equivocada o asiento incompleto (fallo real del enjambre)
 - **SIN-15** (reclasificación deuda): usó `52100002` (inexistente) en vez de `52000002` (existe, golden). Mapeo de cuenta erróneo (521 vs 520).
 - **SIN-16** (devengo intereses): usó `50500001` ("bonos convertibles", madre) en vez de `52700002` (existe, golden). Cuenta conceptualmente equivocada (505 vs 527).
-- **SIN-25** (opción compra leasing): devolvió **asiento vacío**. No supo el devengo `52400002` D 1000 + `47200002` D 210 / `41000009` H 1210.
-- **SIN-03** (liquidación IVA): metió **líneas de más** (golden: 477 D / 472 H / 475 H, 3 líneas; generó 4 con 475 duplicada + 572).
+- **SIN-25** (opción compra leasing): devolvió asiento vacío. No supo el devengo `52400002` D 1000 + `47200002` D 210 / `41000009` H 1210.
+- **SIN-03** (liquidación IVA): metió líneas de más (golden: 477 D / 472 H / 475 H, 3 líneas; generó 4 con 475 duplicada + 572).
 
 ### Validador: alucina cuentas + check estricto (fallo real del enjambre)
-- **SIN-14**: frenó diciendo "crear 48000002" cuando **48000002 existe**. Alucinación / fuente de cuentas no sincronizada con MySQL.
-- **SIN-17**: frenó diciendo "130 sin instancia" cuando **13000002 existe**. Igual.
+- **SIN-14**: frenó diciendo "crear 48000002" cuando 48000002 existe. Alucinación / fuente de cuentas no sincronizada con MySQL.
+- **SIN-17**: frenó diciendo "130 sin instancia" cuando 13000002 existe. Igual.
 - **MKT-01 / MKT-02**: CHECK 3 exige `categoria_producto` en toda VENTA; las liquidaciones de marketplace son agregadas y no lo traen. Check demasiado estricto.
 - **SIN-13** (apertura): pidió desglose de saldos agregados (430/400) aunque el golden usa subcuentas existentes (43000002/40000002). Exceso de celo / zona gris.
 
 ## Lectura corregida
 
-**El banco de pruebas está BIEN** (cuentas existen, documentos legibles). **Los 12 fallos son del enjambre**, concentrados en **operaciones poco frecuentes** (periodificación, reclasificación, devengo, subvención, leasing opción-compra, liquidación IVA, marketplace, apertura). El **núcleo (ventas/compras/cobros/pagos) es sólido**: cuadre 100%, asiento exacto 97,4%.
+**El banco de pruebas está BIEN** (cuentas existen, documentos legibles). **Los 12 fallos son del enjambre**, concentrados en operaciones poco frecuentes (periodificación, reclasificación, devengo, subvención, leasing opción-compra, liquidación IVA, marketplace, apertura). El **núcleo (ventas/compras/cobros/pagos) es sólido**: cuadre 100%, asiento exacto 97,4%.
 
 Reparto por subagente: **generador** 4 (SIN-15/16/25/03), **validador** 4 (SIN-14/17 + MKT-01/02) [+ SIN-13 gris], **extractor** 3 (ACR, variabilidad).
 

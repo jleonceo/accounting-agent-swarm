@@ -13,7 +13,7 @@ Informe del corrector: `2026-06-12-RUN4_sonnet46_fabrica_informe.md` · Salida: 
 ### Instrumento (medida: defectos verificados, NO gaming)
 - **corrector.py:** patrones `FORMATO_INVALIDO` (`cif z-`, `z-00000000`, `no es prefijo`) [FAC-32] + `IVA_INCORRECTO` [FAC-08]. Verificado: 8/8 tests del clasificador.
 - **golden FAC-08:** `COLISION_IDENTIDAD` → `IVA_INCORRECTO` (el flag contradecía sus propios datos: no había segunda identidad; el caso es IVA 10% mal aplicado).
-- **runner (SIN-16):** defecto de banco. El input instruía `Asiento: 662 D / 505 H` pero golden+PGC = **527** (intereses CP de deudas con entidades de crédito; 505 es de bonos). Corregido a 527.
+- En el runner (SIN-16), un defecto de banco. El input instruía `Asiento: 662 D / 505 H` pero golden+PGC = **527** (intereses CP de deudas con entidades de crédito; 505 es de bonos). Corregido a 527.
 
 ## Tail NO cerrado (6 casos): IMPORTANTE para próximas simulaciones
 - **SIN-03** (liquidación IVA): emite líneas de más (475 como debe+haber + 572 banco). **NO se aplicó** el fix de REGLA DOBLE ASIENTO para liquidación IVA (era el F4 del primer guion, se omitió). **Es el único de arreglo limpio pendiente.**
