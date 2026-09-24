@@ -49,6 +49,12 @@ extracto bancario     → PUNTEADOR → conciliación contra MySQL vivo
 - **validador-contable**: verifica cuadre, integridad y coherencia. Decide si se contabiliza o se frena a revisión manual.
 - **punteador-contable**: concilia el extracto bancario contra el diario real en MySQL, línea a línea.
 
+**Después de esta versión.** En septiembre de 2026 el validador se partió en dos agentes: un
+verificador que revisa el asiento sin permiso para escribir en ninguna tabla y un escribano, que es
+el único que escribe y solo lo hace en la tabla de borradores. Así, quien revisa no puede cambiar lo
+que revisa. El sistema privado tiene por eso cinco agentes. Este repositorio muestra la versión de
+cuatro, que es la que se midió aquí.
+
 El enjambre **propone, no ejecuta**: los asientos van a una tabla de borradores y los
 inserta un humano tras revisarlos. La autonomía es proporcional al riesgo de reversibilidad.
 
@@ -229,6 +235,12 @@ bank statement       → RECONCILER → matched against live MySQL
 - **generador-contable**: turns that JSON into a complete journal entry under the Spanish chart of accounts (PGC 2007), using the company's own accounts.
 - **validador-contable**: checks that the entry balances, and checks integrity and coherence. It decides whether the entry goes through or gets held for manual review.
 - **punteador-contable**: reconciles the bank statement against the live MySQL journal, line by line.
+
+**After this version.** In September 2026 the validator was split into two agents: a verifier that
+reviews the entry with no permission to write to any table, and a scribe, the only one that writes,
+and only to the drafts table. That way whoever reviews cannot change what it reviews. The private
+system therefore has five agents. This repository shows the four-agent version, which is the one
+measured here.
 
 The swarm **proposes; it does not post**: entries land in a drafts table and a person inserts
 them after reviewing. Autonomy is proportional to how reversible the action is.
