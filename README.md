@@ -76,8 +76,8 @@ no puede quedar desfasado respecto a los datos.
 
 ## Datos
 
-Los datos son de TechAcces SL, una empresa ficticia creada para este proyecto: unas 17.000 líneas de libro
-diario en MySQL, cuatro ejercicios y terceros y nóminas sintéticos.
+Los datos son de TechAcces SL, una empresa ficticia creada para este proyecto. Su libro diario de cuatro ejercicios
+vive en una base MySQL privada, con terceros y nóminas sintéticos.
 
 ## Repositorios relacionados
 

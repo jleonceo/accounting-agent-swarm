@@ -76,8 +76,8 @@ test set cannot drift away from the data.
 
 ## Data
 
-The data belongs to TechAcces SL, a fictitious company created for this project: about 17,000 ledger lines in
-MySQL, four financial years and synthetic third parties and payroll.
+The data belongs to TechAcces SL, a fictitious company created for this project. Its ledger for four financial
+years lives in a private MySQL database, with synthetic third parties and payroll.
 
 ## Related repositories
 
