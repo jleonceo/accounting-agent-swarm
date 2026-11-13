@@ -36,7 +36,7 @@ central de todo el proyecto: cuando evalúas un sistema LLM, **el banco de prueb
 más a menudo que el sistema**. Si solo miras la última nota, te cuentas una historia equivocada.
 
 La regla que lo gobierna todo: **la simulación se adapta al sistema y nunca el sistema a la
-simulación**. Cuando un caso falla, lo primero es verificar contra la fuente primaria (la base
+simulación**. Cuando un caso falla, lo primero es cotejar con la fuente primaria (la base
 de datos, el documento) quién tiene razón: el golden, el corrector y el harness son sospechosos
 exactamente igual que el enjambre.
 

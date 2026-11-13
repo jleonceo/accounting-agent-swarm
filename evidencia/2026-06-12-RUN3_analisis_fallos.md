@@ -2,7 +2,7 @@
 
 > Nota global **87,1/100**. Ejes: acción correcta 92,2% · asiento exacto 97,4% · **cuadre 100%** · detección revisión 100% · "frenó bien" 61% · conciliación 100%.
 >
-> ⚠️ **Corrección importante (regla de oro):** un primer análisis basado en los *motivos del validador* concluyó "faltan crear 4 cuentas". **Falso.** Verificado en `plan_de_cuentas`: las 4 cuentas EXISTEN (`48000002` Gastos anticipados, `52000002` Deudas c/p entidades crédito, `52700002` Intereses c/p, `13000002` Subvenciones capital). **El banco está bien; los fallos son del ENJAMBRE.** El propio validador dio motivos incorrectos → no fiarse del primer agente, verificar contra la fuente.
+> ⚠️ **Corrección importante (regla de oro):** un primer análisis basado en los *motivos del validador* concluyó "faltan crear 4 cuentas". **Falso.** Verificado en `plan_de_cuentas`: las 4 cuentas EXISTEN (`48000002` Gastos anticipados, `52000002` Deudas c/p entidades crédito, `52700002` Intereses c/p, `13000002` Subvenciones capital). **El banco está bien; los fallos son del ENJAMBRE.** El propio validador dio motivos incorrectos → no fiarse del primer agente, cotejar con la fuente.
 
 ## Clasificación verificada de los fallos
 
