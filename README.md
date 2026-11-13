@@ -16,9 +16,19 @@ Página del proyecto: [jleonceo.github.io/accounting-agent-swarm](https://jleonc
 
 ## Cómo trabaja
 
-```
-documento (.pdf/.txt) → EXTRACTOR → datos → GENERADOR → asiento → VALIDADOR → borrador o revisión
-extracto bancario     → PUNTEADOR → conciliación contra el libro diario en MySQL
+```mermaid
+flowchart TD
+    D[Factura, nómina o recibo] --> E[Extractor<br/>lee el documento]
+    E -->|Ilegible| H[Human in the loop<br/>revisión]
+    E -->|Datos| G[Generador<br/>propone el asiento]
+    G --> V{Validador<br/>¿cuadra y es coherente?}
+    V -->|No| H
+    V -->|Sí| BO[Tabla de borradores]
+    BO --> H2[Human in the loop<br/>pasa al libro diario]
+    X[Extracto bancario] --> P[Punteador<br/>concilia con el libro diario]
+    style V fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    style BO fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    style H fill:#ffebee,stroke:#c62828,color:#b71c1c
 ```
 
 - **Extractor:** lee el documento y devuelve sus datos. Si no se puede leer, lo dice.

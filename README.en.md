@@ -16,9 +16,19 @@ Project page: [jleonceo.github.io/accounting-agent-swarm](https://jleonceo.githu
 
 ## How it works
 
-```
-document (.pdf/.txt) → EXTRACTOR → data → GENERATOR → entry → VALIDATOR → draft or review
-bank statement       → MATCHER   → reconciliation against the ledger in MySQL
+```mermaid
+flowchart TD
+    D[Invoice, payslip or receipt] --> E[Extractor<br/>reads the document]
+    E -->|Unreadable| H[Human in the loop<br/>review]
+    E -->|Data| G[Generator<br/>proposes the entry]
+    G --> V{Validator<br/>balances and coherent?}
+    V -->|No| H
+    V -->|Yes| BO[Drafts table]
+    BO --> H2[Human in the loop<br/>moves it to the ledger]
+    X[Bank statement] --> P[Matcher<br/>reconciles with the ledger]
+    style V fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    style BO fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    style H fill:#ffebee,stroke:#c62828,color:#b71c1c
 ```
 
 - **Extractor:** reads the document and returns its data. If it cannot be read, it says so.
