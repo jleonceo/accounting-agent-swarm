@@ -17,15 +17,18 @@ Página del proyecto: [jleonceo.github.io/accounting-agent-swarm](https://jleonc
 ## Cómo trabaja
 
 ```mermaid
-flowchart TD
-    D[Factura, nómina o recibo] --> E[Extractor<br/>lee el documento]
-    E -->|Ilegible| H[Human in the loop<br/>revisión]
-    E -->|Datos| G[Generador<br/>propone el asiento]
-    G --> V{Validador<br/>¿cuadra y es coherente?}
+flowchart LR
+    D[Factura,<br/>nómina<br/>o recibo] --> S1
+    subgraph S1[Extraer y proponer]
+        direction TB
+        E[Extractor<br/>lee el documento] -->|Datos| G[Generador<br/>propone el asiento]
+    end
+    S1 --> V{Validador<br/>¿cuadra y es<br/>coherente?}
+    S1 -->|Ilegible| H[Human in the loop<br/>revisión]
     V -->|No| H
-    V -->|Sí| BO[Tabla de borradores]
+    V -->|Sí| BO[Tabla de<br/>borradores]
     BO --> H2[Human in the loop<br/>pasa al libro diario]
-    X[Extracto bancario] --> P[Punteador<br/>concilia con el libro diario]
+    X[Extracto<br/>bancario] --> P[Punteador<br/>concilia con el libro diario]
     style V fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
     style BO fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
     style H fill:#ffebee,stroke:#c62828,color:#b71c1c
