@@ -28,7 +28,9 @@ flowchart LR
     V -->|No| H
     V -->|Sí| BO[Tabla de<br/>borradores]
     BO --> H2[Human in the loop<br/>pasa al libro diario]
+    H2 --> LD[Libro<br/>diario]
     X[Extracto<br/>bancario] --> P[Punteador<br/>concilia con el libro diario]
+    P -.-> LD
     style V fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
     style BO fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
     style H fill:#ffebee,stroke:#c62828,color:#b71c1c

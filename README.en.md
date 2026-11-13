@@ -28,7 +28,9 @@ flowchart LR
     V -->|No| H
     V -->|Yes| BO[Drafts<br/>table]
     BO --> H2[Human in the loop<br/>moves it to the ledger]
+    H2 --> LD[Ledger]
     X[Bank<br/>statement] --> P[Matcher<br/>reconciles with the ledger]
+    P -.-> LD
     style V fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
     style BO fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
     style H fill:#ffebee,stroke:#c62828,color:#b71c1c
