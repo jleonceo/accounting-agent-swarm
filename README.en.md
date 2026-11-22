@@ -6,7 +6,7 @@ Five specialised AI agents turn invoices, payslips and bank statements into acco
 **General Accounting Plan** (Plan General Contable). They work on the principle of least privilege: each agent gets
 only the tools its step needs, and none of them can write to the general ledger.
 
-The [project page](https://jleonceo.github.io/accounting-agent-swarm) tells the first chapter, May 2026, with three agents.
+Project page: [jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)
 
 ## How the work is split
 
@@ -46,11 +46,11 @@ Permissions are split so that no agent can do another agent's job. Each one has 
 
 | Agent | Tools | Why |
 |---|---|---|
-| Extractor | read files | it is the only one that sees the original document, and it does not touch the database |
-| Generator | read and search files, look up the account, check balances | it chooses the accounts and the third party, without writing to any table |
-| Verifier | read and search files, check the balance, look for duplicates, check balances | it reviews the entry and has no writing tool at all |
-| Writer | read files, check the balance, look for duplicates, write the draft | it is the only one that writes, and only to the drafts table |
-| Matcher | read and search files, check balances | it studies the reconciliation doubts without writing |
+| Extractor | read and search files | it is the only one that sees the original document. It does not touch the database |
+| Generator | read and search files, look up the ledger account, check account balances | it chooses the accounts and the third party, without writing to any table |
+| Verifier | read and search files, check that the entry balances, look for duplicates, check account balances | it reviews the entry and has no writing tool at all |
+| Writer | read files, check that the entry balances, look for duplicates, write the draft | it is the only one that writes, and only to the drafts table |
+| Matcher | read and search files, check account balances | it studies the reconciliation doubts without writing |
 
 There are three more controls, underneath the agents:
 
@@ -83,8 +83,8 @@ Each measurement in detail:
 
 - **June, 128 documents:** right decision in 125, exact entry in 81 of 84, balanced in all, right reason for
   stopping in 33 of 41 and correct reconciliation in 79 of 79. No wrong entry recorded.
-- **27 June:** the best score, 94.2.
-- **20 July:** the test set grows to 129 entries and 10 statements, and the score drops to 79.4. Two documents
+- **27 June:** the best June score, 94.2 out of 100.
+- **20 July:** the test set grows to 129 entries and 10 statements, and the score is 79.4. Two documents
   were recorded when they should have been stopped.
 - **The big drops in the curve** (32.1, 35.4 and 57.1) came from faults in the test itself: a grader
   that could not read the validator's output, a run that stopped halfway and expected answers out of step with
@@ -95,7 +95,8 @@ Each measurement in detail:
 Each measurement runs the documents through the agents, and a Python grader compares the output with the correct
 answer, written before the measurement. It scores five things: whether the decision to record or stop was right,
 whether the entry is exact in accounts and amounts, whether it balances, whether the reason for stopping was the
-right one and whether the bank reconciliation matches the database.
+right one and whether the bank reconciliation matches the database. The agents run on Claude Sonnet, by Anthropic;
+from 21 June, on Sonnet 4.6. Each score comes from a single run.
 
 The document, the expected entry and the bank movement of each case come from the same record. That way the
 test set cannot drift away from the data.
@@ -106,7 +107,7 @@ It is the record of how the system was measured. It holds the report of each tes
 one, the cause of each drop in score from one test to the next and the permissions sheet of the five agents, with
 the tools each one has.
 
-1. `evidencia/registro_de_runs.md` lists every measurement with its score and cause.
+1. `evidencia/registro_de_runs.md` lists every measurement, from May to July, with its score and cause.
 2. `evidencia/` also keeps the grader's June reports, as they came out, and what was left unresolved.
 3. `eval/eval_enjambre_fabrica.js` is the program that launched each measurement, with local paths removed.
 4. `eval/golden_muestra.json` holds 9 of the 128 test cases, with their correct answer.
@@ -120,6 +121,11 @@ It cannot be run from here. The agents work on the private database of a fictiti
 criteria each agent follows stay in the private project.
 
 - The July score cannot be compared with the earlier ones, because the test set was different and larger.
+- In eight cases without a document the prompt already contains the answer: SIN-14 to SIN-17 and SIN-23 to SIN-25
+  carry the entry, and SIN-18 says it must be stopped. Those eight measure whether the system copies correctly, not
+  its judgement.
+- The fixes were made looking at the same test set. There is no held-out batch of cases never used for tuning.
+  Each score comes from a single run. A comparison with a single agent and a measure of cost are still missing.
 - The cases still failing are rare ones, such as the purchase option of a lease or an opening entry, and part of
   the failure is model variability.
 - In September 2026 the validator was split into two agents: the verifier, which reviews without being able to

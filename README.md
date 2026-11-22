@@ -6,7 +6,7 @@ Cinco agentes de IA especializados convierten facturas, nóminas y extractos ban
 **Plan General Contable**. Trabajan con el principio de mínimo privilegio: cada agente recibe solo las herramientas
 que necesita su paso, y ninguno puede escribir en el libro diario.
 
-La [página del proyecto](https://jleonceo.github.io/accounting-agent-swarm) cuenta el primer capítulo, el de mayo de 2026, con tres agentes.
+Página del proyecto: [jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)
 
 ## Cómo se reparte el trabajo
 
@@ -47,7 +47,7 @@ herramientas:
 
 | Agente | Herramientas | Por qué |
 |---|---|---|
-| Extractor | leer ficheros | es el único que ve el documento original, y no toca la base de datos |
+| Extractor | leer y buscar ficheros | es el único que ve el documento original. No toca la base de datos |
 | Generador | leer y buscar ficheros, buscar la cuenta contable, consultar saldos | elige las cuentas y el tercero, sin escribir en ninguna tabla |
 | Verificador | leer y buscar ficheros, comprobar el cuadre, buscar duplicados, consultar saldos | revisa el asiento y no tiene ninguna herramienta de escritura |
 | Escribano | leer ficheros, comprobar el cuadre, buscar duplicados, escribir el borrador | es el único que escribe, y solo en la tabla de borradores |
@@ -85,8 +85,8 @@ El detalle de cada medición:
 
 - **Junio, 128 documentos:** decisión correcta en 125, asiento exacto en 81 de 84, cuadre en todos, motivo de
   parada correcto en 33 de 41 y conciliación correcta en 79 de 79. Ningún asiento erróneo registrado.
-- **27 de junio:** la mejor nota, 94,2.
-- **20 de julio:** el examen pasa a 129 asientos y 10 extractos, y la nota baja a 79,4. Dos documentos se
+- **27 de junio:** la mejor nota de junio, 94,2 sobre 100.
+- **20 de julio:** el examen pasa a 129 asientos y 10 extractos, y la nota es 79,4. Dos documentos se
   registraron cuando había que pararlos.
 - **Las caídas grandes de la curva** (32,1, 35,4 y 57,1) vinieron de fallos del propio examen: un
   corrector que no leía la salida del validador, una ejecución que se cortó a mitad y unas respuestas
@@ -97,7 +97,8 @@ El detalle de cada medición:
 Cada medición pasa los documentos por los agentes y un corrector en Python compara el resultado con la respuesta
 correcta, escrita antes de la medición. Puntúa cinco cosas: si la decisión de registrar o parar fue correcta, si el
 asiento es exacto en cuentas e importes, si cuadra, si el motivo de parar era el bueno y si la conciliación
-bancaria casa con la base de datos.
+bancaria casa con la base de datos. Los agentes funcionan con Claude Sonnet, de Anthropic; desde el 21 de junio,
+con Sonnet 4.6. Cada nota sale de una sola ejecución.
 
 Los documentos, el asiento esperado y el movimiento bancario de cada caso salen de la misma ficha. Así el examen
 no puede quedar desfasado respecto a los datos.
@@ -108,7 +109,7 @@ Es el registro de cómo se midió el sistema. Contiene los informes de cada exam
 causa de cada bajada de nota entre un examen y el siguiente y la ficha de permisos de los cinco agentes, con las
 herramientas que tiene cada uno.
 
-1. `evidencia/registro_de_runs.md` recoge cada medición con su nota y su causa.
+1. `evidencia/registro_de_runs.md` recoge cada medición, de mayo a julio, con su nota y su causa.
 2. `evidencia/` guarda también los informes del corrector de junio, tal como salieron, y lo que quedó sin
    resolver.
 3. `eval/eval_enjambre_fabrica.js` es el programa que lanzaba cada medición, con las rutas locales quitadas.
@@ -123,6 +124,10 @@ Desde aquí no se puede ejecutar. Los agentes trabajan sobre la base de datos pr
 criterio contable que sigue cada agente se queda en el proyecto privado.
 
 - La nota de julio no se puede comparar con las anteriores, porque el examen era distinto y más grande.
+- En ocho casos sin documento el enunciado ya trae la respuesta: SIN-14 a SIN-17 y SIN-23 a SIN-25 llevan el
+  asiento escrito, y SIN-18 dice que hay que pararlo. Esos ocho miden si el sistema copia bien, no su criterio.
+- Los arreglos se hicieron mirando el mismo examen. No hay un lote de casos reservado que no se haya usado para
+  ajustar. Cada nota sale de una sola ejecución. Falta compararlo con un solo agente y medir el coste.
 - Los casos que siguen fallando son poco frecuentes, como la opción de compra de un leasing o un asiento de
   apertura, y parte del fallo es variabilidad del modelo.
 - En septiembre de 2026 el validador se dividió en dos agentes: el verificador, que revisa sin poder escribir, y el

@@ -44,5 +44,23 @@ El cierre: **93,3/100 sobre 128 casos**. Los 6 casos que quedan abiertos son cas
 variabilidad del modelo, documentados en `2026-06-12-RUN4_cambios_y_tail.md`. Perseguirlos
 uno a uno es el bucle de rendimientos decrecientes.
 
+
+## Después del 13 de junio
+
+Añadido el 22 de noviembre de 2026. La tabla de arriba se cerró el 13 de junio, y el examen se siguió pasando hasta
+julio. Estas son las mediciones completas que vinieron después, sacadas de sus informes originales. Desde aquí se
+identifican por la fecha, porque la numeración interna no coincide con la de arriba.
+
+| Fecha | Modelo | Nota | Decisión correcta | Qué pasó |
+|---|---|---|---|---|
+| 21/06 | Sonnet 4.6 | 87,2 | 124 de 128 | 4 documentos parados que estaban bien |
+| 22/06 | Sonnet 4.6 | 92,5 | 125 de 128 | 3 documentos parados que estaban bien |
+| 22/06 | Sonnet 4.6 | 93,3 | 126 de 128 | 2 documentos parados que estaban bien |
+| 24/06 | Sonnet 4.6 | 93,2 | 124 de 128 | 4 documentos parados que estaban bien |
+| **27/06** | Sonnet 4.6 | **94,2** | 127 de 128 | La mejor nota con 128 casos: 1 documento parado que estaba bien |
+| **20/07** | Sonnet 4.6 | **79,4** | 109 de 129 | Examen mayor, de 129 asientos y 10 extractos. 2 documentos registrados que había que parar (FAC-07 y FAC-13) y 18 parados que estaban bien |
+
+La última medición completa es la del 20 de julio. El cierre de 93,3 de la sección anterior es el del 13 de junio.
+
 ---
-*Fuente: registro de simulaciones del proyecto TechAcces · mayo-junio 2026*
+*Fuente: registro de simulaciones del proyecto TechAcces · mayo-julio 2026*
