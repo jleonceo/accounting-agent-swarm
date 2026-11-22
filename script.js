@@ -6,6 +6,7 @@ function toggleLang() {
   const btn = document.querySelector('.lang-toggle');
   btn.textContent = currentLang === 'es' ? 'EN' : 'ES';
   applyLang();
+  if (counterFinished) showScore(SCORE);
 }
 
 function applyLang() {
@@ -17,21 +18,29 @@ function applyLang() {
 
 // ===== SCORE COUNTER =====
 let counterDone = false;
+let counterFinished = false;
+const SCORE = 79.4;
+
+function showScore(value) {
+  const el = document.getElementById('scoreCounter');
+  if (!el) return;
+  const txt = value.toFixed(1);
+  el.textContent = currentLang === 'es' ? txt.replace('.', ',') : txt;
+}
 
 function animateCounter() {
   if (counterDone) return;
   counterDone = true;
-  const el = document.getElementById('scoreCounter');
-  if (!el) return;
-  const target = 97.0;
+  if (!document.getElementById('scoreCounter')) return;
+  const target = SCORE;
   const duration = 2200;
   const start = performance.now();
   function update(now) {
     const t = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
-    el.textContent = (target * eased).toFixed(1);
+    showScore(target * eased);
     if (t < 1) requestAnimationFrame(update);
-    else el.textContent = '97.0';
+    else { counterFinished = true; showScore(target); }
   }
   requestAnimationFrame(update);
 }
@@ -40,10 +49,10 @@ function animateCounter() {
 function generateDotGrid() {
   const grid = document.getElementById('dotGrid');
   if (!grid) return;
-  // 57 asientos (blue) + 6 extractos (green)
-  for (let i = 0; i < 63; i++) {
+  // examen de julio: 129 asientos (azul) + 10 extractos (verde)
+  for (let i = 0; i < 139; i++) {
     const dot = document.createElement('div');
-    dot.className = 'dot ' + (i < 57 ? 'dot-asiento' : 'dot-ext');
+    dot.className = 'dot ' + (i < 129 ? 'dot-asiento' : 'dot-ext');
     grid.appendChild(dot);
   }
 }
@@ -53,7 +62,7 @@ function lightUpDots() {
   if (dotsLit) return;
   dotsLit = true;
   document.querySelectorAll('.dot').forEach((dot, i) => {
-    setTimeout(() => dot.classList.add('lit'), i * 28);
+    setTimeout(() => dot.classList.add('lit'), i * 14);
   });
 }
 
@@ -86,7 +95,7 @@ const dotGrid = document.getElementById('dotGrid');
 if (dotGrid) observer.observe(dotGrid);
 
 // ===== DOT NAV — active section tracking =====
-const NAV_SECTIONS = ['problema', 'arquitectura', 'eval', 'resultados', 'horizonte'];
+const NAV_SECTIONS = ['problema', 'arquitectura', 'controles', 'eval', 'resultados', 'limites'];
 
 function updateDotNav() {
   const dots = document.querySelectorAll('.dot-nav-item');

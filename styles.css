@@ -281,7 +281,7 @@ blockquote {
 
 .pipe-step {
   flex: 1;
-  min-width: 180px;
+  min-width: 140px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -321,7 +321,7 @@ blockquote {
 .pipe-arrow {
   display: flex;
   align-items: center;
-  padding: 0 0.75rem;
+  padding: 0 0.5rem;
   color: var(--accent);
   font-size: 1.5rem;
   flex-shrink: 0;
@@ -433,7 +433,7 @@ blockquote {
 /* ===== AXES ===== */
 .axes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 1rem;
   margin: 2rem 0;
 }
@@ -673,6 +673,8 @@ footer {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .dot-nav { display: none; }
+  .pipeline { flex-direction: column; }
+  .pipe-arrow { transform: rotate(90deg); align-self: center; }
 }
 
 @media (max-width: 640px) {

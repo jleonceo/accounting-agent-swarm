@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Accounting Agent Swarm — Juan Luis León</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Contabilidad con agentes de IA · Juan Luis León</title>
+  <link rel="stylesheet" href="styles.css?v=1.1" />
 </head>
 <body>
 
@@ -12,11 +12,12 @@
   <nav>
     <span class="nav-logo">⬡ accounting-agent-swarm</span>
     <div class="nav-links">
-      <a href="#problema">El problema</a>
-      <a href="#arquitectura">Arquitectura</a>
-      <a href="#eval">Evaluación</a>
-      <a href="#resultados">Resultados</a>
-      <a href="#horizonte">Horizonte</a>
+      <a href="#problema" data-es="El problema" data-en="The problem"></a>
+      <a href="#arquitectura" data-es="Cómo trabaja" data-en="How it works"></a>
+      <a href="#controles" data-es="Controles" data-en="Controls"></a>
+      <a href="#eval" data-es="Cómo se mide" data-en="How it is measured"></a>
+      <a href="#resultados" data-es="Resultados" data-en="Results"></a>
+      <a href="#limites" data-es="Límites" data-en="Limits"></a>
     </div>
     <button class="lang-toggle" onclick="toggleLang()">EN</button>
   </nav>
@@ -26,25 +27,23 @@
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <div class="hero-tag">
-        <span class="hero-tag-text" data-es="Ingeniería de IA aplicada" data-en="Applied AI Engineering"></span>
+        <span class="hero-tag-text" data-es="Agentes de IA para contabilidad" data-en="AI agents for accounting"></span>
         <span class="hero-tag-sep"> · </span>
-        <span class="hero-date">Mayo 2026</span>
+        <span class="hero-date" data-es="Versión 1.1 · noviembre de 2026" data-en="Version 1.1 · November 2026"></span>
       </div>
-      <div class="callout" style="margin: 0 0 1.5rem; max-width: 640px;" data-es="Esta página cuenta el primer capítulo, el de mayo de 2026: tres agentes y un examen de 63 casos, con una mejor nota de 97,0. Después el examen creció. La última medición completa, de julio de 2026, dio 79,4 sobre 100 con la versión de cuatro agentes, y hoy el sistema tiene cinco. El estado actual está en el &lt;a href='https://github.com/jleonceo/accounting-agent-swarm' style='color: var(--accent2); text-decoration: underline;'&gt;README del repositorio&lt;/a&gt;." data-en="This page tells the first chapter, May 2026: three agents and a 63-case test set, with a best score of 97.0. The test set grew after that. The last full measurement, in July 2026, scored 79.4 out of 100 with the four-agent version, and the system now has five. The current state is in the &lt;a href='https://github.com/jleonceo/accounting-agent-swarm' style='color: var(--accent2); text-decoration: underline;'&gt;repository README&lt;/a&gt;."></div>
-      <h1 data-es="¿Cómo sabes que tu IA<br>contable es correcta?" data-en="How do you know your<br>accounting AI is correct?"></h1>
-      <p class="hero-sub" data-es="Construí un enjambre de tres agentes Claude especializados para automatizar contabilidad real. Luego construí un sistema para medirlos. Esto es lo que encontré." data-en="I built a swarm of three specialized Claude agents to automate real-world accounting. Then I built a system to measure them. This is what I found."></p>
+      <h1 data-es="¿Cómo sabes que tu IA<br>contable acierta?" data-en="How do you know your<br>accounting AI gets it right?"></h1>
+      <p class="hero-sub" data-es="Cinco agentes de IA convierten facturas, nóminas y extractos bancarios en asientos según el Plan General Contable. Un examen con la respuesta correcta escrita de antemano mide si aciertan y dónde fallan." data-en="Five AI agents turn invoices, payslips and bank statements into accounting entries under the Spanish General Accounting Plan. A test set with the correct answer written beforehand measures whether they get it right and where they fail."></p>
       <div class="hero-score">
-        <span class="score-num" id="scoreCounter">0.0</span>
-        <span class="score-label" data-es="/ 100 — Run 13 · récord" data-en="/ 100 — Run 13 · record"></span>
+        <span class="score-num" id="scoreCounter">0,0</span>
+        <span class="score-label" data-es="/ 100 · última medición completa, julio de 2026" data-en="/ 100 · last full measurement, July 2026"></span>
       </div>
       <div class="hero-chips">
-        <span class="chip chip-green" data-es="63 tests" data-en="63 tests"></span>
-        <span class="chip chip-green" data-es="97,0 / 100 · récord R13" data-en="97.0 / 100 · R13 record"></span>
-        <span class="chip chip-green" data-es="100% cuadre" data-en="100% balance"></span>
-        <span class="chip chip-blue" data-es="6 iteraciones" data-en="6 iterations"></span>
+        <span class="chip chip-blue" data-es="5 agentes" data-en="5 agents"></span>
+        <span class="chip chip-green" data-es="examen de 129 asientos y 10 extractos" data-en="test set of 129 entries and 10 statements"></span>
+        <span class="chip chip-green" data-es="97,7 % de decisiones correctas en junio" data-en="97.7% right decisions in June"></span>
       </div>
       <div class="hero-stack">
-        <span>Claude Sonnet 4.6</span>
+        <span>Claude</span>
         <span>Python</span>
         <span>MySQL</span>
         <span>PGC 2007</span>
@@ -56,209 +55,204 @@
   <!-- EL PROBLEMA -->
   <section id="problema" class="section">
     <div class="section-inner">
-      <h2 data-es="El problema de confiar en una IA con dinero real" data-en="The problem of trusting an AI with real money"></h2>
-      <p data-es="La contabilidad tiene cero tolerancia al error. Un asiento descuadrado, una cuenta equivocada, un IVA mal aplicado: en los libros oficiales, todo cuenta. Antes de automatizar, necesitaba responder una pregunta concreta:" data-en="Accounting has zero tolerance for error. An unbalanced entry, a wrong account, a misapplied VAT — in official ledgers, everything counts. Before automating, I needed to answer one specific question:"></p>
-      <blockquote data-es="&ldquo;¿Cuánto acierta el modelo y en qué falla exactamente?&rdquo;" data-en="&ldquo;How accurate is the model, and where exactly does it fail?&rdquo;"></blockquote>
-      <p data-es="La respuesta no podía ser cualitativa. Tenía que ser un número, reproducible, con detalle por caso." data-en="The answer couldn't be qualitative. It had to be a number — reproducible, with per-case detail."></p>
-      <div class="callout" data-es="El punto de partida: llm-eval-contable — un framework de evaluación para una skill contable experta. 50 casos, 66% → 100% en 6 iteraciones. Ese trabajo dio origen al enjambre." data-en="The starting point: llm-eval-contable — an eval framework for a single accounting skill. 50 cases, 66% → 100% in 6 iterations. That work gave rise to the swarm."></div>
+      <h2 data-es="Dejar que una IA proponga asientos" data-en="Letting an AI propose accounting entries"></h2>
+      <p data-es="En contabilidad un error no se queda en el borrador: un asiento descuadrado, una cuenta equivocada o un IVA mal aplicado acaban en el libro diario, que es el registro oficial de la contabilidad. Antes de dejar que una IA proponga asientos hacía falta responder a una pregunta concreta:" data-en="In accounting an error does not stay in the draft: an unbalanced entry, a wrong account or misapplied VAT ends up in the general ledger, the official record of the accounts. Before letting an AI propose entries, one specific question had to be answered:"></p>
+      <blockquote data-es="&ldquo;¿Cuánto acierta y en qué falla exactamente?&rdquo;" data-en="&ldquo;How often is it right, and where exactly does it fail?&rdquo;"></blockquote>
+      <p data-es="La respuesta tenía que ser un número que se pudiera repetir, con el detalle de cada caso. Todo se mide sobre la contabilidad de TechAcces SL, una empresa ficticia con cuatro ejercicios de datos sintéticos en una base MySQL privada." data-en="The answer had to be a repeatable number, with the detail of each case. Everything is measured on the books of TechAcces SL, a fictitious company with four financial years of synthetic data in a private MySQL database."></p>
+      <div class="callout" data-es="El punto de partida fue &lt;a href='https://github.com/jleonceo/llm-eval-contable' style='color: var(--accent2); text-decoration: underline;'&gt;llm-eval-contable&lt;/a&gt;, la evaluación de una sola skill contable. De ahí salió el sistema de agentes." data-en="The starting point was &lt;a href='https://github.com/jleonceo/llm-eval-contable' style='color: var(--accent2); text-decoration: underline;'&gt;llm-eval-contable&lt;/a&gt;, the evaluation of a single accounting skill. The agent system grew out of it."></div>
     </div>
   </section>
 
-  <!-- ARQUITECTURA -->
+  <!-- CÓMO TRABAJA -->
   <section id="arquitectura" class="section section-dark">
     <div class="section-inner">
-      <h2 data-es="Una skill no es suficiente" data-en="One skill is not enough"></h2>
-      <p data-es="El proceso contable real involucra tres operaciones distintas. Diseñé un agente especializado para cada una:" data-en="Real accounting involves three distinct operations. I designed a specialized agent for each:"></p>
+      <h2 data-es="Cómo se reparte el trabajo" data-en="How the work is split"></h2>
+      <p data-es="Un documento recorre cuatro agentes, y una persona aprueba el asiento antes de que llegue al libro diario, que es el registro oficial de la contabilidad:" data-en="A document goes through four agents, and a person approves the entry before it reaches the general ledger, the official record of the accounts:"></p>
 
       <div class="pipeline">
         <div class="pipe-step">
           <div class="pipe-icon">📄</div>
-          <div class="pipe-label">extractor-contable</div>
-          <div class="pipe-desc" data-es="Lee facturas, nóminas y extractos bancarios. Extrae JSON estructurado con todos los campos necesarios." data-en="Reads invoices, payslips and bank statements. Extracts structured JSON with all required fields."></div>
-          <div class="pipe-badge">v1.5</div>
+          <div class="pipe-label" data-es="Extractor" data-en="Extractor"></div>
+          <div class="pipe-desc" data-es="Lee el documento original, sea factura, nómina o recibo, y devuelve sus datos." data-en="Reads the original document, whether invoice, payslip or receipt, and returns its data."></div>
         </div>
         <div class="pipe-arrow">→</div>
         <div class="pipe-step">
           <div class="pipe-icon">⚖️</div>
-          <div class="pipe-label">generador-contable</div>
-          <div class="pipe-desc" data-es="Desde el JSON, genera asientos completos siguiendo el PGC 2007. Verifica entidades conocidas (PASO 0) antes de contabilizar." data-en="From the JSON, generates complete journal entries following PGC 2007. Verifies known entities (PASO 0) before booking."></div>
-          <div class="pipe-badge">v1.7</div>
+          <div class="pipe-label" data-es="Generador" data-en="Generator"></div>
+          <div class="pipe-desc" data-es="Propone el asiento a partir de esos datos, sin ver el documento." data-en="Proposes the entry from that data, without seeing the document."></div>
         </div>
         <div class="pipe-arrow">→</div>
         <div class="pipe-step">
           <div class="pipe-icon">✓</div>
-          <div class="pipe-label">validador-contable</div>
-          <div class="pipe-desc" data-es="Verifica cuadre (Σdebe = Σhaber), integridad de campos y confianza. Asigna estado: BORRADOR, REVISION_MANUAL o ERROR." data-en="Verifies balance (Σdebit = Σcredit), field integrity and confidence. Assigns status: DRAFT, MANUAL_REVIEW or ERROR."></div>
-          <div class="pipe-badge">v1.5</div>
+          <div class="pipe-label" data-es="Verificador" data-en="Verifier"></div>
+          <div class="pipe-desc" data-es="Revisa el asiento sin saber quién lo propuso y sin ninguna herramienta de escritura." data-en="Reviews the entry without knowing who proposed it and without any writing tool."></div>
+        </div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-step">
+          <div class="pipe-icon">✎</div>
+          <div class="pipe-label" data-es="Escribano" data-en="Writer"></div>
+          <div class="pipe-desc" data-es="Guarda el asiento aprobado en una tabla de borradores. El paso al libro diario lo decide una persona." data-en="Saves the approved entry to a drafts table. A person decides when it moves to the ledger."></div>
         </div>
       </div>
 
-      <h3 data-es="Arquitectura two-phase" data-en="Two-phase architecture"></h3>
-      <p data-es="Los documentos se procesan en paralelo por tipo en la Fase 1. Los extractos bancarios se procesan secuencialmente en la Fase 2, con el contexto de los asientos ya generados para poder conciliar." data-en="Documents are processed in parallel by type in Phase 1. Bank statements are processed sequentially in Phase 2, using the context of already-generated entries to reconcile."></p>
+      <p data-es="El quinto agente, el &lt;strong&gt;punteador&lt;/strong&gt;, trabaja aparte, sobre la conciliación bancaria. Un motor sin IA casa cada movimiento del banco con su asiento, y cuando encuentra dos opciones que cuadran igual, el punteador estudia la duda. Si no puede resolverla, la deja para una persona." data-en="The fifth agent, the &lt;strong&gt;matcher&lt;/strong&gt;, works separately, on bank reconciliation. An engine without AI matches each bank movement with its entry, and when it finds two options that fit equally well, the matcher studies the doubt. If it cannot resolve it, it leaves it for a person."></p>
+    </div>
+  </section>
 
-      <div class="diagram">
-        <div class="diagram-phase">
-          <div class="phase-label" data-es="Fase 1 — Paralelo" data-en="Phase 1 — Parallel"></div>
-          <div class="phase-groups">
-            <span class="group">FAC</span>
-            <span class="group">NOM</span>
-            <span class="group">SIN</span>
-            <span class="group">NEW</span>
-            <span class="group">OCR</span>
-          </div>
+  <!-- CONTROLES -->
+  <section id="controles" class="section">
+    <div class="section-inner">
+      <h2 data-es="Cada agente, solo lo que necesita" data-en="Each agent, only what it needs"></h2>
+      <p data-es="Los permisos se reparten para que ningún agente pueda hacer el trabajo de otro. Cada uno recibe solo estas herramientas:" data-en="Permissions are split so that no agent can do another agent's job. Each one gets only these tools:"></p>
+
+      <div class="axes-grid">
+        <div class="axis">
+          <div class="axis-name" data-es="Extractor" data-en="Extractor"></div>
+          <div class="axis-desc" data-es="Leer y buscar ficheros. Es el único que ve el documento original. No toca la base de datos." data-en="Read and search files. It is the only one that sees the original document. It does not touch the database."></div>
         </div>
-        <div class="phase-arrow">↓</div>
-        <div class="diagram-phase">
-          <div class="phase-label" data-es="Fase 2 — Secuencial" data-en="Phase 2 — Sequential"></div>
-          <div class="phase-groups">
-            <span class="group group-ext">EXT-01 → EXT-02 → … → EXT-06</span>
-          </div>
+        <div class="axis">
+          <div class="axis-name" data-es="Generador" data-en="Generator"></div>
+          <div class="axis-desc" data-es="Leer y buscar ficheros, buscar la cuenta contable y consultar saldos. No escribe en ninguna tabla." data-en="Read and search files, look up the ledger account and check account balances. It writes to no table."></div>
+        </div>
+        <div class="axis">
+          <div class="axis-name" data-es="Verificador" data-en="Verifier"></div>
+          <div class="axis-desc" data-es="Leer y buscar ficheros, comprobar el cuadre, buscar duplicados y consultar saldos. No tiene ninguna herramienta de escritura." data-en="Read and search files, check that the entry balances, look for duplicates and check account balances. It has no writing tool at all."></div>
+        </div>
+        <div class="axis">
+          <div class="axis-name" data-es="Escribano" data-en="Writer"></div>
+          <div class="axis-desc" data-es="Leer ficheros, comprobar el cuadre, buscar duplicados y escribir el borrador. Es el único que escribe, y solo en la tabla de borradores." data-en="Read files, check that the entry balances, look for duplicates and write the draft. It is the only one that writes, and only to the drafts table."></div>
+        </div>
+        <div class="axis">
+          <div class="axis-name" data-es="Punteador" data-en="Matcher"></div>
+          <div class="axis-desc" data-es="Leer y buscar ficheros y consultar saldos. Estudia las dudas de la conciliación sin escribir." data-en="Read and search files and check account balances. It studies the reconciliation doubts without writing."></div>
+        </div>
+      </div>
+
+      <p data-es="Hay tres controles más, por debajo de los agentes:" data-en="There are three more controls, underneath the agents:"></p>
+      <div class="lessons">
+        <div class="lesson">
+          <div class="lesson-run" data-es="La base de datos pone su propio límite" data-en="The database sets its own limit"></div>
+          <div class="lesson-text" data-es="El usuario con el que entran los agentes solo puede escribir en las tablas de borradores. Si alguien intenta escribir en el libro diario o borrar un registro, la base de datos lo rechaza, aunque falle todo lo demás." data-en="The user the agents connect with can only write to the drafts tables. If anyone tries to write to the ledger or delete a record, the database refuses, even if everything else fails."></div>
+        </div>
+        <div class="lesson">
+          <div class="lesson-run" data-es="Una persona decide" data-en="A person decides"></div>
+          <div class="lesson-text" data-es="Ningún asiento pasa de la tabla de borradores al libro diario sin que lo apruebe una persona." data-en="No entry moves from the drafts table to the ledger without a person approving it."></div>
+        </div>
+        <div class="lesson">
+          <div class="lesson-run" data-es="El criterio está escrito" data-en="The criteria are written down"></div>
+          <div class="lesson-text" data-es="El criterio contable está en documentos de consulta que el agente abre antes de decidir: asientos tipo de la empresa, una biblioteca de asientos del Plan General Contable y el catálogo de clientes, proveedores y empleados." data-en="The accounting criteria are in reference documents the agent opens before deciding: the company's standard entries, a library of entries under the Spanish General Accounting Plan and the catalogue of customers, suppliers and employees."></div>
+        </div>
+        <div class="lesson">
+          <div class="lesson-run" data-es="Las fichas están publicadas" data-en="The agent sheets are published"></div>
+          <div class="lesson-text" data-es="La ficha de cada agente, con su lista de herramientas tal como la recibe, está en la carpeta &lt;a href='https://github.com/jleonceo/accounting-agent-swarm/tree/main/agentes' style='color: var(--accent2); text-decoration: underline;'&gt;agentes&lt;/a&gt; del repositorio." data-en="Each agent's sheet, with its tool list exactly as it receives it, is in the repository's &lt;a href='https://github.com/jleonceo/accounting-agent-swarm/tree/main/agentes' style='color: var(--accent2); text-decoration: underline;'&gt;agentes&lt;/a&gt; folder."></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EVALUACIÓN -->
-  <section id="eval" class="section">
+  <!-- CÓMO SE MIDE -->
+  <section id="eval" class="section section-dark">
     <div class="section-inner">
-      <h2 data-es="Eval-driven: medir antes de confiar" data-en="Eval-driven: measure before trusting"></h2>
-      <p data-es="63 casos de prueba con un golden set de respuestas esperadas. Cada punto es un test real — el corrector automático mide cuatro ejes independientes:" data-en="63 test cases with a golden set of expected answers. Each dot is a real test — the automated grader measures four independent axes:"></p>
+      <h2 data-es="Medir antes de confiar" data-en="Measure before trusting"></h2>
+      <p data-es="El examen de julio tiene 129 asientos y 10 extractos bancarios, cada uno con su respuesta correcta escrita antes de la medición. Cada punto es un caso:" data-en="The July test set has 129 entries and 10 bank statements, each with its correct answer written before the measurement. Each dot is a case:"></p>
 
       <div class="dot-grid-wrap">
         <div class="dot-grid" id="dotGrid"></div>
         <div class="dot-legend">
           <span class="dot-legend-item">
             <span class="dot-sample dot-sample-asiento"></span>
-            <span data-es="57 asientos" data-en="57 journal entries"></span>
+            <span data-es="129 asientos" data-en="129 entries"></span>
           </span>
           <span class="dot-legend-item">
             <span class="dot-sample dot-sample-ext"></span>
-            <span data-es="6 extractos bancarios" data-en="6 bank statements"></span>
+            <span data-es="10 extractos bancarios" data-en="10 bank statements"></span>
           </span>
         </div>
       </div>
 
+      <p data-es="Los agentes funcionan con Claude Sonnet, de Anthropic, con Sonnet 4.6 desde el 21 de junio. Un corrector en Python compara su salida con la respuesta correcta y puntúa cinco cosas:" data-en="The agents run on Claude Sonnet, by Anthropic, on Sonnet 4.6 from 21 June. A Python grader compares their output with the correct answer and scores five things:"></p>
       <div class="axes-grid">
         <div class="axis">
-          <div class="axis-weight">30%</div>
-          <div class="axis-name" data-es="Acción correcta" data-en="Correct action"></div>
-          <div class="axis-desc" data-es="¿Contabilizar o marcar para revisión?" data-en="Book or flag for review?"></div>
+          <div class="axis-weight">1</div>
+          <div class="axis-name" data-es="La decisión" data-en="The decision"></div>
+          <div class="axis-desc" data-es="¿Había que registrar el asiento o pararlo para revisión?" data-en="Should the entry be recorded or stopped for review?"></div>
         </div>
         <div class="axis">
-          <div class="axis-weight">30%</div>
-          <div class="axis-name" data-es="Asiento exacto" data-en="Exact entry"></div>
-          <div class="axis-desc" data-es="Cuentas e importes correctos al céntimo" data-en="Correct accounts and amounts to the cent"></div>
+          <div class="axis-weight">2</div>
+          <div class="axis-name" data-es="El asiento exacto" data-en="The exact entry"></div>
+          <div class="axis-desc" data-es="Cuentas e importes correctos" data-en="Correct accounts and amounts"></div>
         </div>
         <div class="axis">
-          <div class="axis-weight">25%</div>
-          <div class="axis-name" data-es="Detección de rotos" data-en="Error detection"></div>
-          <div class="axis-desc" data-es="Identificar documentos con errores reales" data-en="Identify documents with real errors"></div>
+          <div class="axis-weight">3</div>
+          <div class="axis-name" data-es="El cuadre" data-en="The balance"></div>
+          <div class="axis-desc" data-es="El debe y el haber suman lo mismo" data-en="Debits equal credits"></div>
         </div>
         <div class="axis">
-          <div class="axis-weight">15%</div>
-          <div class="axis-name" data-es="Conciliación" data-en="Reconciliation"></div>
-          <div class="axis-desc" data-es="Cruzar extractos bancarios con asientos" data-en="Match bank movements with journal entries"></div>
+          <div class="axis-weight">4</div>
+          <div class="axis-name" data-es="El motivo de parar" data-en="The reason for stopping"></div>
+          <div class="axis-desc" data-es="Si se para, que sea por la razón correcta" data-en="If it stops, it is for the right reason"></div>
+        </div>
+        <div class="axis">
+          <div class="axis-weight">5</div>
+          <div class="axis-name" data-es="La conciliación" data-en="The reconciliation"></div>
+          <div class="axis-desc" data-es="Cada movimiento del banco casa con su asiento en la base de datos" data-en="Each bank movement matches its entry in the database"></div>
         </div>
       </div>
 
-      <div class="eval-note" data-es="Principio fundamental: la simulación se adapta al sistema, nunca el sistema a la simulación. Las variables del eval reflejan el sistema real — no se modifican para que el test pase." data-en="Fundamental principle: the simulation adapts to the system, never the system to the simulation. Eval variables reflect the real system — they are not modified to make tests pass."></div>
+      <div class="eval-note" data-es="Los documentos, el asiento esperado y el movimiento bancario de cada caso salen de la misma ficha. Así el examen no puede quedar desfasado respecto a los datos." data-en="The document, the expected entry and the bank movement of each case come from the same record. That way the test set cannot drift away from the data."></div>
     </div>
   </section>
 
   <!-- RESULTADOS -->
-  <section id="resultados" class="section section-dark">
+  <section id="resultados" class="section">
     <div class="section-inner">
-      <h2 data-es="Seis runs, un récord" data-en="Six runs, one record"></h2>
-      <p data-es="El camino hacia 97.0 no fue lineal. Las regresiones enseñaron tanto como los récords: cada caída reveló algo que los prompts no expresaban con suficiente precisión." data-en="The path to 97.0 wasn't linear. Regressions taught as much as records: each drop revealed something the prompts didn't express precisely enough."></p>
+      <h2 data-es="Lo que sale" data-en="What comes out"></h2>
+      <p data-es="Las cifras se midieron con la versión anterior del sistema, en la que un solo agente, el validador, revisaba y guardaba el asiento. Cada examen es distinto, así que las notas no se comparan entre sí." data-en="The figures were measured with the previous version of the system, in which a single agent, the validator, reviewed and saved the entry. Each test set is different, so the scores are not compared with each other."></p>
 
-      <div class="runs-chart">
-        <div class="run-bar" style="--h:22%" title="Run 8: 80.1">
-          <div class="run-fill"></div>
-          <div class="run-score">80.1</div>
-          <div class="run-label">R8</div>
-        </div>
-        <div class="run-bar" style="--h:67%" title="Run 9: 93.3">
-          <div class="run-fill"></div>
-          <div class="run-score">93.3</div>
-          <div class="run-label">R9</div>
-        </div>
-        <div class="run-bar" style="--h:56%" title="Run 10: 89.9">
-          <div class="run-fill run-regression"></div>
-          <div class="run-score">89.9</div>
-          <div class="run-label">R10</div>
-        </div>
-        <div class="run-bar" style="--h:70%" title="Run 11: 94.0">
-          <div class="run-fill"></div>
-          <div class="run-score">94.0</div>
-          <div class="run-label">R11</div>
-        </div>
-        <div class="run-bar" style="--h:54%" title="Run 12: 89.5">
-          <div class="run-fill run-regression"></div>
-          <div class="run-score">89.5</div>
-          <div class="run-label">R12</div>
-        </div>
-        <div class="run-bar" style="--h:80%" title="Run 13: 97.0">
-          <div class="run-fill run-record"></div>
-          <div class="run-score">97.0</div>
-          <div class="run-label">R13 ★</div>
-        </div>
-      </div>
+      <img src="assets/curva_runs.png" alt="Evolución de la nota en 23 mediciones, de mayo a julio de 2026" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 1.5rem 0;" />
 
       <div class="lessons">
         <div class="lesson">
-          <div class="lesson-run" data-es="R10 → regresión" data-en="R10 → regression"></div>
-          <div class="lesson-text" data-es="Una nota demasiado amplia sobre cuentas de gasto afectó a documentos que no eran el objetivo. Las correcciones quirúrgicas necesitan exclusiones explícitas." data-en="An overly broad note about expense accounts affected non-target documents. Surgical fixes need explicit exclusions."></div>
+          <div class="lesson-run" data-es="Mayo · 63 casos" data-en="May · 63 cases"></div>
+          <div class="lesson-text" data-es="La primera fase, con tres agentes, llegó a 97,0 sobre 100 en un examen de 63 casos." data-en="The first phase, with three agents, reached 97.0 out of 100 on a 63-case test set."></div>
         </div>
         <div class="lesson">
-          <div class="lesson-run" data-es="R11 → récord previo (94.0)" data-en="R11 → previous record (94.0)"></div>
-          <div class="lesson-text" data-es="3 correcciones quirúrgicas independientes. Cada fix apuntó a un caso específico sin tocar los demás. Alta de subcuentas: 8/8 = 100%." data-en="3 independent surgical fixes. Each fix targeted a specific case without touching others. Subccount creation: 8/8 = 100%."></div>
+          <div class="lesson-run" data-es="Junio · 128 documentos" data-en="June · 128 documents"></div>
+          <div class="lesson-text" data-es="Decisión correcta en 125 (97,7 %), asiento exacto en 81 de 84, cuadre en todos, motivo de parada correcto en 33 de 41 y conciliación correcta en 79 de 79. Ningún asiento erróneo registrado. La mejor nota de junio, 94,2 sobre 100, llegó el 27 de junio." data-en="Right decision in 125 (97.7%), exact entry in 81 of 84, balanced in all, right reason for stopping in 33 of 41 and correct reconciliation in 79 of 79. No wrong entry recorded. The best June score, 94.2 out of 100, came on 27 June."></div>
         </div>
         <div class="lesson">
-          <div class="lesson-run" data-es="R12 → regresión" data-en="R12 → regression"></div>
-          <div class="lesson-text" data-es="Al corregir FAC-23, el grupo NEW colapsó: 6/9 entidades nuevas marcadas para revisión. El prompt describía la lógica pero no la acción esperada." data-en="While fixing FAC-23, the NEW group collapsed: 6/9 new entities flagged for review. The prompt described the logic but not the expected action."></div>
+          <div class="lesson-run" data-es="Julio · examen más grande" data-en="July · larger test set"></div>
+          <div class="lesson-text" data-es="Con 129 asientos y 10 extractos, la nota es 79,4. Dos documentos se registraron cuando había que pararlos." data-en="With 129 entries and 10 statements, the score is 79.4. Two documents were recorded when they should have been stopped."></div>
         </div>
         <div class="lesson">
-          <div class="lesson-run" data-es="R13 → récord 97.0" data-en="R13 → record 97.0"></div>
-          <div class="lesson-text" data-es="REGLA CRÍTICA explícita: entidad nueva siempre contabilizar. Alta subcuentas: 8/8. Conciliación: 88%. La diferencia fue una sola instrucción." data-en="Explicit CRITICAL RULE: new entity always books. Subccount creation: 8/8. Reconciliation: 88%. The difference was a single instruction."></div>
+          <div class="lesson-run" data-es="Las caídas de la curva" data-en="The drops in the curve"></div>
+          <div class="lesson-text" data-es="Las tres grandes (32,1, 35,4 y 57,1) vinieron de fallos del propio examen: un corrector que no leía la salida del validador, una ejecución que se cortó a mitad y unas respuestas correctas desfasadas respecto a la base de datos." data-en="The three big ones (32.1, 35.4 and 57.1) came from faults in the test itself: a grader that could not read the validator's output, a run that stopped halfway and expected answers out of step with the database."></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HORIZONTE -->
-  <section id="horizonte" class="section">
+  <!-- LÍMITES -->
+  <section id="limites" class="section section-dark">
     <div class="section-inner">
-      <h2 data-es="Hacia dónde va" data-en="Where this is heading"></h2>
-      <p data-es="El objetivo final es un flujo de trabajo completamente automatizado:" data-en="The end goal is a fully automated workflow:"></p>
-
-      <div class="roadmap">
-        <div class="road-step road-done">
-          <span class="road-icon">✓</span>
-          <span data-es="Eval framework — skill individual (llm-eval-contable)" data-en="Eval framework — single skill (llm-eval-contable)"></span>
+      <h2 data-es="Límites" data-en="Limits"></h2>
+      <p data-es="Desde el repositorio no se puede ejecutar: los agentes trabajan sobre la base de datos privada de la empresa ficticia, y el criterio contable que sigue cada agente se queda en el proyecto privado. Lo que se publica es la medición." data-en="It cannot be run from the repository: the agents work on the fictitious company's private database, and the accounting criteria each agent follows stay in the private project. What is published is the measurement."></p>
+      <div class="lessons">
+        <div class="lesson">
+          <div class="lesson-run" data-es="Lo que sigue fallando" data-en="What still fails"></div>
+          <div class="lesson-text" data-es="Casos poco frecuentes, como la opción de compra de un leasing o un asiento de apertura. Parte del fallo es variabilidad del modelo." data-en="Rare cases, such as the purchase option of a lease or an opening entry. Part of the failure is model variability."></div>
         </div>
-        <div class="road-step road-done">
-          <span class="road-icon">✓</span>
-          <span data-es="Enjambre de 3 agentes — pipeline completo" data-en="3-agent swarm — complete pipeline"></span>
+        <div class="lesson">
+          <div class="lesson-run" data-es="Cuatro y cinco agentes" data-en="Four and five agents"></div>
+          <div class="lesson-text" data-es="En septiembre de 2026 el validador se dividió en el verificador y el escribano. Lo medido es la versión anterior, de cuatro agentes." data-en="In September 2026 the validator was split into the verifier and the writer. What was measured is the previous, four-agent version."></div>
         </div>
-        <div class="road-step road-done">
-          <span class="road-icon">✓</span>
-          <span data-es="Eval del enjambre — 97.0/100 · 6 runs" data-en="Swarm eval — 97.0/100 · 6 runs"></span>
+        <div class="lesson">
+          <div class="lesson-run" data-es="Ocho casos con la respuesta dentro" data-en="Eight cases with the answer inside"></div>
+          <div class="lesson-text" data-es="En ocho casos sin documento el enunciado ya trae la respuesta: siete llevan el asiento escrito y uno dice que hay que pararlo. Esos ocho miden si el sistema copia bien, no su criterio." data-en="In eight cases without a document the prompt already contains the answer: seven carry the entry and one says it must be stopped. Those eight measure whether the system copies correctly, not its judgement."></div>
         </div>
-        <div class="road-step road-wip">
-          <span class="road-icon">◎</span>
-          <span data-es="Integración n8n — Gmail → enjambre → MySQL" data-en="n8n integration — Gmail → swarm → MySQL"></span>
-        </div>
-        <div class="road-step road-next">
-          <span class="road-icon">○</span>
-          <span data-es="RAG vectorial — embeddings, chunking, vector store y evaluación RAGAS" data-en="Vectorial RAG — embeddings, chunking, vector store and RAGAS evaluation"></span>
-        </div>
-        <div class="road-step road-next">
-          <span class="road-icon">○</span>
-          <span data-es="Dashboard Power BI — reporting automático" data-en="Power BI dashboard — automated reporting"></span>
-        </div>
-        <div class="road-step road-next">
-          <span class="road-icon">○</span>
-          <span data-es="100/100 — contabilidad sin fricción" data-en="100/100 — frictionless accounting"></span>
+        <div class="lesson">
+          <div class="lesson-run" data-es="Un solo examen y una sola ejecución" data-en="One test set and one run"></div>
+          <div class="lesson-text" data-es="Los arreglos se hicieron mirando el mismo examen, sin un lote de casos reservado. Cada nota sale de una sola ejecución. Falta compararlo con un solo agente y medir el coste." data-en="The fixes were made looking at the same test set, with no held-out batch of cases. Each score comes from a single run. A comparison with a single agent and a measure of cost are still missing."></div>
         </div>
       </div>
     </div>
@@ -267,26 +261,27 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <span data-es="Construido por" data-en="Built by"></span>
+      <span data-es="Hecho por" data-en="Built by"></span>
       <a href="https://juanluisleon.vercel.app" target="_blank">Juan Luis León Rodríguez</a>
       <span class="footer-sep">·</span>
-      <a href="https://github.com/jleonceo/llm-eval-contable" target="_blank">llm-eval-contable</a>
+      <a href="https://github.com/jleonceo/accounting-agent-swarm" target="_blank" data-es="Repositorio" data-en="Repository"></a>
       <span class="footer-sep">·</span>
       <a href="https://github.com/jleonceo" target="_blank">GitHub</a>
       <span class="footer-sep">·</span>
-      <span class="footer-meta">97.0 / 100 · Mayo 2026</span>
+      <span class="footer-meta" data-es="Versión 1.1 · noviembre de 2026" data-en="Version 1.1 · November 2026"></span>
     </div>
   </footer>
 
   <!-- DOT NAV -->
   <nav class="dot-nav" id="dotNav">
     <a href="#problema"     class="dot-nav-item" data-label="El problema"></a>
-    <a href="#arquitectura" class="dot-nav-item" data-label="Arquitectura"></a>
-    <a href="#eval"         class="dot-nav-item" data-label="Evaluación"></a>
+    <a href="#arquitectura" class="dot-nav-item" data-label="Cómo trabaja"></a>
+    <a href="#controles"    class="dot-nav-item" data-label="Controles"></a>
+    <a href="#eval"         class="dot-nav-item" data-label="Cómo se mide"></a>
     <a href="#resultados"   class="dot-nav-item" data-label="Resultados"></a>
-    <a href="#horizonte"    class="dot-nav-item" data-label="Horizonte"></a>
+    <a href="#limites"      class="dot-nav-item" data-label="Límites"></a>
   </nav>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=1.1"></script>
 </body>
 </html>
