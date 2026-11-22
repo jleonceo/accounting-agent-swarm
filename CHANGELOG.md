@@ -1,5 +1,9 @@
 # Registro de cambios
 
+## 1.2.1 · 22 de noviembre de 2026
+
+- La cabecera y el pie de la página decían «Versión 1.1». Ahora dicen 1.2.
+
 ## 1.2 · 22 de noviembre de 2026
 
 - **La página del proyecto, rehecha.** Contaba la fase de mayo; ahora cuenta lo mismo que el README, en español y en
