@@ -40,6 +40,32 @@ flowchart LR
     style H fill:#ffebee,stroke:#c62828,color:#b71c1c
 ```
 
+## Controls
+
+Permissions are split so that no agent can do another agent's job. Each one has only these tools:
+
+| Agent | Tools | Why |
+|---|---|---|
+| Extractor | read files | it is the only one that sees the original document, and it does not touch the database |
+| Generator | read and search files, look up the account, check balances | it chooses the accounts and the third party, without writing to any table |
+| Verifier | read and search files, check the balance, look for duplicates, check balances | it reviews the entry and has no writing tool at all |
+| Writer | read files, check the balance, look for duplicates, write the draft | it is the only one that writes, and only to the drafts table |
+| Matcher | read and search files, check balances | it studies the reconciliation doubts without writing |
+
+There are three more controls, underneath the agents:
+
+- **The database sets its own limit.** The user the agents connect with can only write to the drafts tables. If
+  anyone tries to write to the ledger or delete a record, the database refuses, even if everything else fails.
+- **A person decides** which entry moves from the drafts table to the ledger.
+- **The accounting criteria are written down in reference documents**, not left to the model's memory. The
+  generator looks up the company's standard entries and a library of entries under the
+  Spanish General Accounting Plan. The extractor and the verifier look up the catalogue of customers, suppliers
+  and employees. Those documents stay in the private project.
+
+The sheets of the five agents, with their tool list exactly as they receive it, are in [`agentes/`](agentes/).
+How a multi-agent system is checked to keep following its own rules is in
+[gobernanza-agentes-verificada](https://github.com/jleonceo/gobernanza-agentes-verificada).
+
 ## Results
 
 > Both figures were measured with the previous version of the system, in which a single agent, the validator,
@@ -85,7 +111,8 @@ the tools each one has.
 3. `eval/eval_enjambre_fabrica.js` is the program that launched each measurement, with local paths removed.
 4. `eval/golden_muestra.json` holds 9 of the 128 test cases, with their correct answer.
 5. `index.html`, `styles.css` and `script.js` make up the project page.
-6. `CHANGELOG.md` records what changes in each version.
+6. `agentes/` holds the sheets of the five agents, with each one's tool list.
+7. `CHANGELOG.md` records what changes in each version.
 
 ## Limits
 

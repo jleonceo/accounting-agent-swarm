@@ -40,6 +40,34 @@ flowchart LR
     style H fill:#ffebee,stroke:#c62828,color:#b71c1c
 ```
 
+## Controles
+
+Los permisos se reparten para que ningún agente pueda hacer el trabajo de otro. Cada uno tiene solo estas
+herramientas:
+
+| Agente | Herramientas | Por qué |
+|---|---|---|
+| Extractor | leer ficheros | es el único que ve el documento original, y no toca la base de datos |
+| Generador | leer y buscar ficheros, buscar la cuenta contable, consultar saldos | elige las cuentas y el tercero, sin escribir en ninguna tabla |
+| Verificador | leer y buscar ficheros, comprobar el cuadre, buscar duplicados, consultar saldos | revisa el asiento y no tiene ninguna herramienta de escritura |
+| Escribano | leer ficheros, comprobar el cuadre, buscar duplicados, escribir el borrador | es el único que escribe, y solo en la tabla de borradores |
+| Punteador | leer y buscar ficheros, consultar saldos | estudia las dudas de la conciliación sin escribir |
+
+Hay tres controles más, por debajo de los agentes:
+
+- **La base de datos pone su propio límite.** El usuario con el que entran los agentes solo puede escribir en las
+  tablas de borradores. Si alguien intenta escribir en el libro diario o borrar un registro, la base de datos lo
+  rechaza, aunque falle todo lo demás.
+- **Una persona decide** qué asiento pasa de la tabla de borradores al libro diario.
+- **El criterio contable está escrito en documentos de consulta**, no en la memoria del modelo. El generador
+  consulta los asientos tipo de la empresa y una biblioteca de asientos del Plan General
+  Contable. El extractor y el verificador consultan el catálogo de clientes, proveedores y empleados. Esos
+  documentos se quedan en el proyecto privado.
+
+Las fichas de los cinco agentes, con su lista de herramientas tal como la reciben, están en [`agentes/`](agentes/).
+Cómo se vigila que un sistema de agentes siga cumpliendo sus propias reglas está en
+[gobernanza-agentes-verificada](https://github.com/jleonceo/gobernanza-agentes-verificada).
+
 ## Resultados
 
 > Las dos cifras se midieron con la versión anterior del sistema, en la que un solo agente, el validador, revisaba y
@@ -86,7 +114,8 @@ herramientas que tiene cada uno.
 3. `eval/eval_enjambre_fabrica.js` es el programa que lanzaba cada medición, con las rutas locales quitadas.
 4. `eval/golden_muestra.json` contiene 9 de los 128 casos del examen, con su respuesta correcta.
 5. `index.html`, `styles.css` y `script.js` forman la página del proyecto.
-6. `CHANGELOG.md` recoge lo que cambia en cada versión.
+6. `agentes/` guarda las fichas de los cinco agentes, con la lista de herramientas de cada uno.
+7. `CHANGELOG.md` recoge lo que cambia en cada versión.
 
 ## Límites
 
