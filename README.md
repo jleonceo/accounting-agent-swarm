@@ -6,7 +6,7 @@ Cinco agentes de IA especializados convierten facturas, nóminas y extractos ban
 **Plan General Contable**. Trabajan con el principio de mínimo privilegio: cada agente recibe solo las herramientas
 que necesita su paso, y ninguno puede escribir en el libro diario.
 
-Página del proyecto: [jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)
+La [página del proyecto](https://jleonceo.github.io/accounting-agent-swarm) cuenta el primer capítulo, el de mayo de 2026, con tres agentes.
 
 ## Cómo se reparte el trabajo
 

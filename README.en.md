@@ -6,7 +6,7 @@ Five specialised AI agents turn invoices, payslips and bank statements into acco
 **General Accounting Plan** (Plan General Contable). They work on the principle of least privilege: each agent gets
 only the tools its step needs, and none of them can write to the general ledger.
 
-Project page: [jleonceo.github.io/accounting-agent-swarm](https://jleonceo.github.io/accounting-agent-swarm)
+The [project page](https://jleonceo.github.io/accounting-agent-swarm) tells the first chapter, May 2026, with three agents.
 
 ## How the work is split
 
