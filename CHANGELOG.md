@@ -4,10 +4,13 @@
 
 - **La página del proyecto, rehecha.** Contaba la fase de mayo; ahora cuenta lo mismo que el README, en español y en
   inglés (`b2d512d`).
+- **Tres asientos con errores en junio.** El README decía que no se registró ningún asiento erróneo. El informe de
+  junio tiene tres: dos vacíos y uno con líneas de más. Corregido en el README y en la página.
 - **El registro de mediciones llega a julio.** Faltaban las seis mediciones del 21 de junio al 20 de julio
   (`53ff952`).
 - **Los límites del examen, a la vista.** En ocho casos el enunciado ya trae la respuesta, los arreglos se hicieron
-  sobre el mismo examen y cada nota sale de una sola ejecución. Se dice el modelo: Claude Sonnet, con Sonnet 4.6 desde
+  sobre el mismo examen, cada nota sale de una sola ejecución y la conciliación usa un extracto sacado del
+  propio libro diario. Se dice el modelo: Claude Sonnet, con Sonnet 4.6 desde
   el 21 de junio (`53ff952`).
 
 ## 1.1 · 22 de noviembre de 2026

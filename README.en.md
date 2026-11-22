@@ -82,7 +82,9 @@ How a multi-agent system is checked to keep following its own rules is in
 Each measurement in detail:
 
 - **June, 128 documents:** right decision in 125, exact entry in 81 of 84, balanced in all, right reason for
-  stopping in 33 of 41 and correct reconciliation in 79 of 79. No wrong entry recorded.
+  stopping in 33 of 41 and correct reconciliation in 79 of 79. Three entries were recorded with errors: two empty
+  (ACR-41000006 and SIN-25) and one with extra lines (SIN-03). They would have reached the drafts table, where a
+  person reviews each entry before the ledger.
 - **27 June:** the best June score, 94.2 out of 100.
 - **20 July:** the test set grows to 129 entries and 10 statements, and the score is 79.4. Two documents
   were recorded when they should have been stopped.
@@ -124,6 +126,8 @@ criteria each agent follows stay in the private project.
 - In eight cases without a document the prompt already contains the answer: SIN-14 to SIN-17 and SIN-23 to SIN-25
   carry the entry, and SIN-18 says it must be stopped. Those eight measure whether the system copies correctly, not
   its judgement.
+- The reconciliation uses a statement taken from the ledger itself, so every movement has its entry. It still has
+  to be tested with movements that are not in the ledger.
 - The fixes were made looking at the same test set. There is no held-out batch of cases never used for tuning.
   Each score comes from a single run. A comparison with a single agent and a measure of cost are still missing.
 - The cases still failing are rare ones, such as the purchase option of a lease or an opening entry, and part of

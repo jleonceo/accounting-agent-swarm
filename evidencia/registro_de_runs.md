@@ -61,6 +61,8 @@ identifican por la fecha, porque la numeración interna no coincide con la de ar
 | **20/07** | Sonnet 4.6 | **79,4** | 109 de 129 | Examen mayor, de 129 asientos y 10 extractos. 2 documentos registrados que había que parar (FAC-07 y FAC-13) y 18 parados que estaban bien |
 
 La última medición completa es la del 20 de julio. El cierre de 93,3 de la sección anterior es el del 13 de junio.
+En ese cierre, tres asientos se registraron con errores: dos vacíos (ACR-41000006 y SIN-25) y uno con líneas de
+más (SIN-03). Lo dice su informe, `2026-06-12-RUN4_informe.md`.
 
 ---
 *Fuente: registro de simulaciones del proyecto TechAcces · mayo-julio 2026*

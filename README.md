@@ -84,7 +84,9 @@ Cómo se vigila que un sistema de agentes siga cumpliendo sus propias reglas est
 El detalle de cada medición:
 
 - **Junio, 128 documentos:** decisión correcta en 125, asiento exacto en 81 de 84, cuadre en todos, motivo de
-  parada correcto en 33 de 41 y conciliación correcta en 79 de 79. Ningún asiento erróneo registrado.
+  parada correcto en 33 de 41 y conciliación correcta en 79 de 79. Tres asientos se registraron con errores: dos
+  vacíos (ACR-41000006 y SIN-25) y uno con líneas de más (SIN-03). Habrían llegado a la tabla de borradores, donde
+  una persona revisa cada asiento antes del libro diario.
 - **27 de junio:** la mejor nota de junio, 94,2 sobre 100.
 - **20 de julio:** el examen pasa a 129 asientos y 10 extractos, y la nota es 79,4. Dos documentos se
   registraron cuando había que pararlos.
@@ -126,6 +128,8 @@ criterio contable que sigue cada agente se queda en el proyecto privado.
 - La nota de julio no se puede comparar con las anteriores, porque el examen era distinto y más grande.
 - En ocho casos sin documento el enunciado ya trae la respuesta: SIN-14 a SIN-17 y SIN-23 a SIN-25 llevan el
   asiento escrito, y SIN-18 dice que hay que pararlo. Esos ocho miden si el sistema copia bien, no su criterio.
+- La conciliación usa un extracto sacado del propio libro diario, así que cada movimiento tiene su asiento. Falta
+  probarla con movimientos que no estén en el diario.
 - Los arreglos se hicieron mirando el mismo examen. No hay un lote de casos reservado que no se haya usado para
   ajustar. Cada nota sale de una sola ejecución. Falta compararlo con un solo agente y medir el coste.
 - Los casos que siguen fallando son poco frecuentes, como la opción de compra de un leasing o un asiento de
