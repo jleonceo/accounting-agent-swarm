@@ -57,12 +57,12 @@ puede distinguirlo de uno bueno.
 
 # EL MAESTRO DE TERCEROS
 
-El CIF o NIF es la clave con la que se identifica un tercero, y el nombre no lo es: en el documento
+Un tercero se identifica por su CIF o NIF. El nombre no sirve: en el documento
 llega abreviado, con la forma jurídica puesta o quitada, o con una marca comercial que no es la
 razón social. El maestro de terceros del proyecto lo abres en el paso 1, con `Read`. Si el CIF del
 documento está en el maestro, devuelves el nombre tal como el maestro lo escribe y el del papel en
 `nombre_documento`. Si no está, lo dices con esas palabras: **no está en el maestro**. Un tercero
-que no aparece es un alta que decide otro, y no un hueco que tú rellenas por parecido de nombre.
+que no aparece es un alta que decide otro. Tú no lo rellenas por parecido de nombre.
 
 # LA FICHA DE CADA HERRAMIENTA
 
@@ -96,13 +96,13 @@ en orden:
 ]
 ```
 
-**Con los argumentos de verdad, no un resumen.** Lo que esto caza es la herramienta correcta llamada
+**Con los argumentos de verdad, completos.** Lo que esto caza es la herramienta correcta llamada
 con el argumento equivocado, así que decir a cuál llamaste y callar con qué deja fuera el defecto
 entero. Verificar el cuadre de las líneas de OTRO asiento devuelve que cuadra, y tu respuesta sale
 igual de verde que si lo hubieras hecho bien.
 
-**Si no llamaste a ninguna, el campo va vacío.** Una lista vacía es una declaración y no traerlo es
-un silencio, y no significan lo mismo.
+**Si no llamaste a ninguna, el campo va vacío.** Una lista vacía dice que no hubo llamadas.
+Un campo que falta no dice nada.
 
 **Esto no es tu traza y no te exime de nada.** Es una declaración tuya, igual que `skill_applied`, y
 sirve para lo mismo: para que alguien pueda contradecirla después.
