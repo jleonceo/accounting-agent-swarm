@@ -59,7 +59,7 @@ Hay tres controles más, por debajo de los agentes:
   tablas de borradores. Si alguien intenta escribir en el libro diario o borrar un registro, la base de datos lo
   rechaza, aunque falle todo lo demás.
 - **Una persona decide** qué asiento pasa de la tabla de borradores al libro diario.
-- **El criterio contable está escrito en documentos de consulta**, no en la memoria del modelo. El generador
+- **El criterio contable está escrito en documentos de consulta**, que el agente abre antes de decidir. El generador
   consulta los asientos tipo de la empresa y una biblioteca de asientos del Plan General
   Contable. El extractor y el verificador consultan el catálogo de clientes, proveedores y empleados. Esos
   documentos se quedan en el proyecto privado.

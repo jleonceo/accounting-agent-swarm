@@ -57,7 +57,7 @@ There are three more controls, underneath the agents:
 - **The database sets its own limit.** The user the agents connect with can only write to the drafts tables. If
   anyone tries to write to the ledger or delete a record, the database refuses, even if everything else fails.
 - **A person decides** which entry moves from the drafts table to the ledger.
-- **The accounting criteria are written down in reference documents**, not left to the model's memory. The
+- **The accounting criteria are written down in reference documents**, which the agent opens before deciding. The
   generator looks up the company's standard entries and a library of entries under the
   Spanish General Accounting Plan. The extractor and the verifier look up the catalogue of customers, suppliers
   and employees. Those documents stay in the private project.
